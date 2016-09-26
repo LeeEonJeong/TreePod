@@ -32,6 +32,8 @@ for($i=0; $i<$result_num; $i++){
    if($result[$i]['productstate']=="available") { 
      if(isset($result[$i]['diskofferingid'])){
        $diskofferingid = $result[$i]['diskofferingid'];
+     }else {
+       $diskofferingid = "rootonly";
      }
     echo "<tr><form action='deploy_result.php' method='post'><td>";
     

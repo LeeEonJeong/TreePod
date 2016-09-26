@@ -12,8 +12,21 @@ include('var_dump_enter.php');
 var_dump_enter($_POST);
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
+if ($_POST['diskofferingid']=="rootonly"){
+  $listProductcmdArr = array(
+    "command" => "deployVirtualMachine",
+    "serviceofferingid" => $_POST['serviceofferingid'],
+    "templateid" => $_POST['templateid'],
+//    "diskofferingid" => $_POST['diskofferingid'], 
+//    "productcode" => $_POST['productid'],
+    "zoneid" => $_POST['zoneid'],
+    "displayname" => "jjkserver2",
+    "usageplantype" => "hourly",
+    "apikey" => API_KEY
+  );
 
-$listProductcmdArr = array(
+} else {
+  $listProductcmdArr = array(
     "command" => "deployVirtualMachine",
     "serviceofferingid" => $_POST['serviceofferingid'],
     "templateid" => $_POST['templateid'],
@@ -23,7 +36,8 @@ $listProductcmdArr = array(
     "displayname" => "jjkserver2",
     "usageplantype" => "hourly",
     "apikey" => API_KEY
-);
+  );
+}
 var_dump_enter($listProductcmdArr);
 $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
 sleep(1);

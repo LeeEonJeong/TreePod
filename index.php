@@ -55,6 +55,8 @@ $result = $result['virtualmachine'];
 for($i=0; $i<$result_num; $i++){
   if($result_num != '1' ) {
     $temp = $result[$i];
+  }else {
+    $temp = $result;
   }
     echo "<tr><form method='post'><td>";
     
@@ -85,7 +87,7 @@ for($i=0; $i<$result_num; $i++){
     
 <?php
     }
-    }
+  }
 }
 
 ?>
