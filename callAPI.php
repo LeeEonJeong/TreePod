@@ -54,7 +54,7 @@ function callCommand($URL, $cmdArr, $SECRET)
                 $url = $url . $cmd1[$i] . "&";
         $xmlUrl = $url . "signature=" . $signature;
  
-        echo ($xmlUrl);
+        echo ($xmlUrl."<br/>");
         $orig_error_reporting = error_reporting();
         error_reporting(0);
        

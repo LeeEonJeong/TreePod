@@ -39,6 +39,6 @@ do {
   }
 } while ($jobStatus != 1);
 
-?>
+?><a href="index.php">홈으로 가기</a>
 </body>
 </html>

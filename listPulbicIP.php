@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 </head><body>
 <table>
-<tr><td>ip번호</td><td>VM</td><td>포트 번호</td></tr>
+<tr><td>ip번호</td><td>VM</td><td>공용 포트 번호</td><td>내부 포트 번호</td><td>-</td></tr>
 <?php
 
 include('api_constants.php');
@@ -17,7 +17,7 @@ include('var_dump_enter.php');
 // var_dump_enter($cmdArr);
  $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
  $result = callCommand($URL, $cmdArr, SECERET_KEY);
- var_dump_enter($result);
+ //var_dump_enter($result);
  $num = $result['count'];
  $result = $result['publicipaddress'];
  
@@ -42,12 +42,13 @@ include('var_dump_enter.php');
   <?php
     for($j=0; $j<$vm_num; $j++){
       if($result[$i]['zoneid'] == $vm_result[$j]['zoneid'])
-        echo "<option  value='".$vm_result[$j]['id']."'>".$vm_result[$j]['name']."</option>";
+        echo "<option  value='".$vm_result[$j]['id']."'>".$vm_result[$j]['displayname']."</option>";
       }
   ?>
   </select>
   </td>
-  <td><input type='number' name='port'/></td>
+  <td><input type='number' name='publicport'/></td>
+  <td><input type='number' name='privateport'/></td>
   <td><input type='submit' value='등록'/></td>
   </form>
   </tr>
@@ -55,5 +56,6 @@ include('var_dump_enter.php');
  }
 ?>
 </table>
+<a href="index.php">홈으로 가기</a>
 </body>
 </html>

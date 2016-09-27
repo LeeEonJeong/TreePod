@@ -33,6 +33,7 @@ function stopVM(num){
 </head>
 <body>
 <a href="deployAPI.php">새로운 서버 신청하기</a><br/>
+<a href="listPulbicIP.php">포트 포워딩 하기</a><br/>
 <table>
 <?php
 include('api_constants.php');

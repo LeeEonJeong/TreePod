@@ -20,7 +20,8 @@ if ($_POST['diskofferingid']=="rootonly"){
 //    "diskofferingid" => $_POST['diskofferingid'], 
 //    "productcode" => $_POST['productid'],
     "zoneid" => $_POST['zoneid'],
-    "displayname" => "jjkserver2",
+    "displayname" => $_POST['displayname'],
+ //   "name" => $_POST['displayname'],
     "usageplantype" => "hourly",
     "apikey" => API_KEY
   );
@@ -33,7 +34,8 @@ if ($_POST['diskofferingid']=="rootonly"){
     "diskofferingid" => $_POST['diskofferingid'], 
 //    "productcode" => $_POST['productid'],
     "zoneid" => $_POST['zoneid'],
-    "displayname" => "jjkserver2",
+    "displayname" => $_POST['displayname'],
+ //   "name" => $_POST['displayname'],
     "usageplantype" => "hourly",
     "apikey" => API_KEY
   );
@@ -60,5 +62,6 @@ do {
 } while ($jobStatus != 1);
 */
 ?>
+<a href="index.php">홈으로 가기</a>
 </body>
 </html>

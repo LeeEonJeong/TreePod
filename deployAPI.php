@@ -36,7 +36,7 @@ for($i=0; $i<$result_num; $i++){
        $diskofferingid = "rootonly";
      }
     echo "<tr><form action='deploy_result.php' method='post'><td>";
-    
+   
     echo $result[$i]['product'];
     echo "<input type='hidden' name='productid' value='".$result[$i]['productid']."'/>";
     echo "</td> <td>";
@@ -51,6 +51,8 @@ for($i=0; $i<$result_num; $i++){
     echo "</td> <td>";
     echo $result[$i]['zonedesc'];
     echo "<input type='hidden' name='zoneid' value='".$result[$i]['zoneid']."'/>";
+    echo"</td><td>";
+     echo "<input type='text' name='displayname'/>";
     echo "</td><td><input type='submit' value='신청'/></td></tr></form>";
     
   }

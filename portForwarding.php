@@ -11,9 +11,9 @@ include('var_dump_enter.php');
  $cmdArr = array (
     "command" => "createPortForwardingRule",
     "ipaddressid" => $_POST['ipaddressid'],
-    "privateport" => $_POST['port'],
+    "privateport" => $_POST['privateport'],
     "protocol" => 'TCP',
-    "publicport" => $_POST['port'],
+    "publicport" => $_POST['publicport'],
     "virtualmachineid" => $_POST['virtualmachineid'],
     "apikey" => API_KEY
  );
@@ -22,5 +22,6 @@ include('var_dump_enter.php');
  $result = callCommand($URL, $cmdArr, SECERET_KEY);
  var_dump_enter($result);
 ?>
+<a href="index.php">홈으로 가기</a>
 </body>
 </html>
