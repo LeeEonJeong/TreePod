@@ -39,6 +39,6 @@ do {
   }
 } while ($jobStatus != 1);
 
-?><a href="index.php">È¨À¸·Î °¡±â</a>
+?><a href="index.php">í™ˆìœ¼ë¡œ ê°€ê¸°</a>
 </body>
 </html>
