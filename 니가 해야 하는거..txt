@@ -1,0 +1,14 @@
+-지금 제대로 만든 것-
+1. 비동기화 처리 JavaScript : asy.js
+2. <p><span id="state"> (여기에 비동기화 처리문구가 나온다) </span></p>
+3. execute버튼을 누르면 비동기화 처리 상태를 로딩함. (페이지를 못벗어남 시버류ㅠㅠㅠ)
+
+-야매로 만든 것-
+1. deleteProtForwarding.php 비동기화 -> session['processID'][숫자] 형태로 저장중. // 여러개 해결 못하는 중 ㅠㅠ
+2. head2.php 파일은 portForwardingList.php 
+3. SESSION지우는 php 파일은 sessionDestroy.php
+
+-야매로 만든거 고쳐야 하는거 - 
+0. setInterval함수 돌아가는 원리 알아야함.setInterval()함수 멈추는 방법 생각해보기.
+1. 여러개 해결 못함. head2.php 로 고쳐 나간 후에 전체 적용.
+2. asyn더안해도 될 경우에 어떻게 SESSION['processID']['숫자'] unset할지????????????? 어떠헥 햄 냐럼나ㅣ러ㅏ시ㅓ바ㅓ사ㅣ시시발넘아!! 

@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+include('head.html');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');
@@ -17,11 +18,8 @@ if ($_POST['diskofferingid']=="rootonly"){
     "command" => "deployVirtualMachine",
     "serviceofferingid" => $_POST['serviceofferingid'],
     "templateid" => $_POST['templateid'],
-//    "diskofferingid" => $_POST['diskofferingid'], 
-//    "productcode" => $_POST['productid'],
     "zoneid" => $_POST['zoneid'],
     "displayname" => $_POST['displayname'],
- //   "name" => $_POST['displayname'],
     "usageplantype" => "hourly",
     "apikey" => API_KEY
   );
@@ -31,11 +29,9 @@ if ($_POST['diskofferingid']=="rootonly"){
     "command" => "deployVirtualMachine",
     "serviceofferingid" => $_POST['serviceofferingid'],
     "templateid" => $_POST['templateid'],
-    "diskofferingid" => $_POST['diskofferingid'], 
-//    "productcode" => $_POST['productid'],
+    "diskofferingid" => $_POST['diskofferingid'],
     "zoneid" => $_POST['zoneid'],
     "displayname" => $_POST['displayname'],
- //   "name" => $_POST['displayname'],
     "usageplantype" => "hourly",
     "apikey" => API_KEY
   );
@@ -62,6 +58,9 @@ do {
 } while ($jobStatus != 1);
 */
 ?>
+<br/>
+<input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
+<script src="asy.js"></script>
 <a href="index.php">홈으로 가기</a>
 </body>
 </html>

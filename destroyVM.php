@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+include('head.html');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');
@@ -45,6 +46,9 @@ do {
 } while ($jobStatus != 1);
 */
 ?>
+<br/>
+<input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
+<script src="asy.js"></script>
 <a href="index.php">홈으로 가기</a>
 </body>
 </html>

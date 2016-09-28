@@ -13,6 +13,7 @@ table,tr,td{
 
 <table>
 <?php
+include('head.html');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');

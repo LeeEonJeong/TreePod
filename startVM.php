@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+include('head.html');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');
@@ -23,7 +24,7 @@ $result = callCommand($URL, $startcmdArr, $seceret_key);
 sleep(1);
 $jobId = $result["jobid"];
 echo $jobId;
-
+/*
 do {
   $cmdArr2 = array(
     "command" => "queryAsyncJobResult",
@@ -38,7 +39,11 @@ do {
       exit;
   }
 } while ($jobStatus != 1);
-
-?><a href="index.php">홈으로 가기</a>
+*/
+?>
+<br/>
+<input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
+<script src="asy.js"></script>
+<a href="index.php">홈으로 가기</a>
 </body>
 </html>
