@@ -48,13 +48,14 @@ do {
 <script>
   test('<?= $result['jobid']?>');
   timeid = setInterval("test('<?= $result['jobid']?>')", 4000);
-  function stopInterval(){
-    clearInterval(timeid);
-  } // 멈추는거 어떻게 구현해야해 ^^?? 시벌...
 </script>
 <?php
-    $_SESSION['processID'][count($_SESSION)] = $result['jobid'];
-    echo $_SESSION['processID'.count($_SESSION)];
+ //  echo "ㅅㅂ";var_dump($_SESSION['processID']);
+   if(!isset($_SESSION['processID'])){
+      $_SESSION['processID'] = array();
+   }
+    array_push($_SESSION['processID'], $result['jobid']);
+    echo end($_SESSION['processID']);
 ?>
 <a href="listPulbicIP.php">내 공인 IP 보기</a>
 <a href="index.php">홈으로 가기</a>
