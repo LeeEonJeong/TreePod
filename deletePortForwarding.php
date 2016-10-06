@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 </head><body>
 <?php
+include('sessionPush.php');
 include('head.html');
 include('api_constants.php');
 include ('./callAPI.php');
@@ -47,15 +48,17 @@ do {
 <script src="asy.js"></script>
 <script>
   test('<?= $result['jobid']?>');
-  timeid = setInterval("test('<?= $result['jobid']?>')", 4000);
 </script>
 <?php
  //  echo "ㅅㅂ";var_dump($_SESSION['processID']);
-   if(!isset($_SESSION['processID'])){
-      $_SESSION['processID'] = array();
-   }
-    array_push($_SESSION['processID'], $result['jobid']);
-    echo end($_SESSION['processID']);
+
+  session_push('processID',$result['jobid']);
+//   if(!isset($_SESSION['processID'])){
+//      $_SESSION['processID'] = array();
+//   }
+//    array_push($_SESSION['processID'], $result['jobid']);
+//    echo end($_SESSION['processID']);
+    echo "<script>alert('삭제 신청이 완료 되었습니다.'); location.replace('listPulbicIP.php');</script>";
 ?>
 <a href="listPulbicIP.php">내 공인 IP 보기</a>
 <a href="index.php">홈으로 가기</a>

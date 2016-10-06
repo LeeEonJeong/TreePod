@@ -56,9 +56,10 @@
     xhr.open('POST', 'asynchronousPart.php');
     xhr.onreadystatechange = function(){
       document.querySelector('#state'+num).innerHTML = xhr.responseText;
-      var temp = xhr.responseText
-      if(temp =="done!"){
-        alert(temp);
+      var temp = getCookie(jobid);
+    //  alert(getCookie(num));
+      if(temp =="DONE"){
+    //    alert(temp);
         clearInterval(timeid);
       }
    //   alert(document.querySelector('#state'+num).innerHTML);

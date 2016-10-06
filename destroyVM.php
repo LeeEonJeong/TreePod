@@ -21,6 +21,7 @@ $stopcmdArr = array(
 $destroycmdArr = array(
     "command" => "destroyVirtualMachine",
     "id" => $_POST['id'],
+    "expunge" => true,
     "apikey" => API_KEY
 );
 var_dump_enter($destroycmdArr);

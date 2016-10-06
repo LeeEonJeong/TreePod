@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+/* background image */
+.u_likeit_list_module .u_likeit_list_btn .u_ico{background-image:url(http://static.naver.net/m/likeit/blog/sp_likeit_pc3.png)}
+
+/* 엔드 상단 */
+#post-area .post-btn .postre .u_likeit_list_module .u_likeit_list_btn{height:18px;padding:0 7px 0 6px;}
+#post-area .post-btn .postre .u_likeit_list_module .u_likeit_list_btn .u_ico{width:10px;height:9px;margin:5px 3px 0 0;}
+#post-area .post-btn .postre .u_likeit_list_module .u_likeit_list_btn.on .u_ico{background-position:-20px 0}
+#post-area .post-btn .postre .u_likeit_list_module .u_likeit_list_btn .u_cnt{padding:4px 0 0 0;font-family:'돋움',Dotum !important}
+#post-area .post-btn .postre .u_likeit_list_module .u_likeit_list_btn .u_cnt:not(*:root){padding:3px 0 0 0;}

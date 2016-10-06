@@ -54,12 +54,23 @@ function callCommand($URL, $cmdArr, $SECRET)
                 $url = $url . $cmd1[$i] . "&";
         $xmlUrl = $url . "signature=" . $signature;
  
- //       echo ($xmlUrl."<br/>");
+    //    echo ($xmlUrl."<br/>");
         $orig_error_reporting = error_reporting();
         error_reporting(0);
-       
+
+    //    $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
+    //    $context = stream_context_create($opts);
+    //    $header = file_get_contents($xmlUrl, FALSE, $context);
+    //    echo $header;
+    //    var_dump_enter(file_get_contents($xmlUrl));
         $str = file_get_contents($xmlUrl);
- //     echo "<pre>".htmlentities($str)."</pre>";
+    //    var_dump_enter($str);
+        if($str == FALSE) {
+        //    var_dump_enter($str);
+            echo "<br/>ERROR in API<br/>";
+            return "ERROR";
+        }
+    //  echo "<pre>".htmlentities($str)."</pre>";
         $obj = simplexml_load_string($str);
 
         $arrXml = objectsIntoArray($obj);
@@ -68,4 +79,7 @@ function callCommand($URL, $cmdArr, $SECRET)
         error_reporting($orig_error_reporting);
         return $arrXml;
 }
+
+
+
 ?>

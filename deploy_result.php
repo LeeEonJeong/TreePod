@@ -1,16 +1,20 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
 
+<link rel="stylesheet" type="text/css" href="design.css">
+<link rel="stylesheet" type="text/css" href="menu_design.css">
+<link rel="stylesheet" type="text/css" href="alert_bar_design.css">
 </head>
 <body>
 <?php
-include('head.html');
+//include('head2.php');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');
-var_dump_enter($_POST);
+//var_dump_enter($_POST);
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 if ($_POST['diskofferingid']=="rootonly"){
@@ -36,11 +40,15 @@ if ($_POST['diskofferingid']=="rootonly"){
     "apikey" => API_KEY
   );
 }
-var_dump_enter($listProductcmdArr);
+//var_dump_enter($listProductcmdArr);
 $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
-sleep(1);
+set_time_limit(600);
+/*
+sleep(30);
+*/
 $jobId = $result["jobid"];
 echo $jobId;
+
 /*
 do {
   $cmdArr2 = array(
@@ -58,9 +66,19 @@ do {
 } while ($jobStatus != 1);
 */
 ?>
-<br/>
+<a href="index.php">홈으로 가기</a><br/>
 <input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
-<script src="asy.js"></script>
-<a href="index.php">홈으로 가기</a>
+<script src="asy.js">
+</script>
+<?php
+ //  echo "ㅅㅂ";var_dump($_SESSION['processID']);
+   if(!isset($_SESSION['processID'])){
+      $_SESSION['processID'] = array();
+   }
+    array_push($_SESSION['processID'], $result['jobid']);
+    echo end($_SESSION['processID']);
+    echo "<script>location.replace('myServer.php');</script>";
+?>
+
 </body>
 </html>

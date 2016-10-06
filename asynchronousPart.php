@@ -1,5 +1,6 @@
 <?php
-session_start();
+//session_start();
+include('sessionPush.php');
 include('api_constants.php');
 include ('./callAPI.php');
 include('var_dump_enter.php');
@@ -18,6 +19,7 @@ for($i=0; $i<count($_SESSION['processID']); $i++){
     break;
   }
 }*/
+
 $jobRank=$_POST['jobRank'];
 //echo $jobRank."<br/>";
   $cmdArr2 = array(
@@ -31,15 +33,38 @@ $jobRank=$_POST['jobRank'];
   $jobStatus = $result2["jobstatus"];
 //  echo "<br/>";
   if ($jobStatus == 2) {
-    echo $_POST['jobid']." : fail!<br/>";
-    var_dump_enter($result2);
+    echo "work fail!<br/>";
+   // var_dump_enter($result2);
    //  printf($result2["jobresult"]);
   //    exit;
   }
   else if ($jobStatus == 1 ) {
     echo "done!";
+//    echo "<br/>".$jobRank."<br/>";
 //    echo "<script>setCookie('".$_POST['jobid']."', 'done', 1); document.write('되니??');</script>";
 //    echo $jobRank;
+    if(isset($result2['jobresult']['virtualmachine']['password'])){
+      echo "<br/>";
+      $displayname = $result2['jobresult']['virtualmachine']['displayname'];
+      $password = $result2['jobresult']['virtualmachine']['password'];
+      echo $displayname."의 비밀 번호는 ".$password." 입니다.";
+      $_SESSION[$displayname] = $password;
+      var_dump($_SESSION);
+//      session_push('displayname',$result2['jobresult']['virtualmachine']['displayname']);
+//      if(!isset($_SESSION['virtualmachine'])){
+//        $_SESSION['virtualmachine'] = array();
+//      }
+//      array_push($_SESSION['virtualmachine'], $result2['jobresult']['virtualmachine']['displayname']);
+     // echo end($_SESSION['virtualmachine']);
+//      session_push('password',$result2['jobresult']['virtualmachine']['password']);
+//      if(!isset($_SESSION['password'])){
+//        $_SESSION['password'] = array();
+//      }
+//      array_push($_SESSION['password'], $result2['jobresult']['virtualmachine']['password']);
+     // echo end($_SESSION['virtualmachine']);
+    
+    }
+    setcookie($_POST['jobid'], "DONE", time() + 1800); //set cookie 30min.
     unset($_SESSION['processID'][$jobRank]);
 //    $_SESSION['done'][$jobRank];
 //    var_dump($_SESSION['done']);
@@ -47,6 +72,6 @@ $jobRank=$_POST['jobRank'];
 //    var_dump_enter($result2);
   }
   else {
-    echo $_POST['jobid']." : working now...<img src='load.gif'>";
+    echo "working now...<img height='17px' src='load.gif'>";
   }
 ?>
