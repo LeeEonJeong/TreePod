@@ -61,11 +61,11 @@ function submitForm(){
 <body>
 
 <?php
-include('head2.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
-include('alert.html');
+include_once('head2.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
+include_once('customAlert.html');
  
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 
@@ -79,7 +79,7 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 //var_dump_enter($result);
 ?>
 
-<table class="gray_line">
+<table class="gray_line hoverOn">
 <tbody>
 <form name ="sendform" id ="sendform" method="post">
 <tr>

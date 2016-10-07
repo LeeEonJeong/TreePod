@@ -41,6 +41,7 @@ if ($_POST['diskofferingid']=="rootonly"){
   );
 }
 //var_dump_enter($listProductcmdArr);
+
 $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
 set_time_limit(600);
 /*
@@ -66,12 +67,10 @@ do {
 } while ($jobStatus != 1);
 */
 ?>
-<a href="index.php">홈으로 가기</a><br/>
-<input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
+<!--<a href="index.php">홈으로 가기</a><br/> -->
 <script src="asy.js">
 </script>
 <?php
- //  echo "ㅅㅂ";var_dump($_SESSION['processID']);
    if(!isset($_SESSION['processID'])){
       $_SESSION['processID'] = array();
    }

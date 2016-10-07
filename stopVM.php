@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,10 @@
 </head>
 <body>
 <?php
-include('head.html');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
+include_once('sessionPush.php');
 var_dump_enter($_POST);
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -21,29 +22,16 @@ $stopcmdArr = array(
 var_dump_enter($stopcmdArr);
 $seceret_key = SECERET_KEY;
 $result = callCommand($URL, $stopcmdArr, $seceret_key);
-sleep(1);
+set_time_limit(600);
 $jobId = $result["jobid"];
 echo $jobId;
-/*
-do {
-  $cmdArr2 = array(
-    "command" => "queryAsyncJobResult",
-    "jobid" => $jobId,
-    "apikey"  => API_KEY
-  );
-  $result2 = callCommand($URL, $cmdArr2, SECERET_KEY);
-  sleep(5);
-  $jobStatus = $result2["jobstatus"];
-  if ($jobStatus == 2) {
-     printf($result2["jobresult"]);
-      exit;
-  }
-} while ($jobStatus != 1);
-*/
+
+if(!isset($result['jobid'])){
+  alert("error");
+  echo "<script>location.replace('myServer.php');</script>";
+}
+  session_push('processID',$result['jobid']);
+ echo "<script>location.replace('myServer.php');</script>";
 ?>
-<br/>
-<input type="button" id="execute" value="execute" onclick="test('<?= $result['jobid']?>')"/>
-<script src="asy.js"></script>
-<a href="index.php">홈으로 가기</a>
 </body>
 </html>

@@ -26,7 +26,9 @@ table, tr, td{
     border-collapse: collapse;
     
 }
-
+tr:hover {
+  background-color: #f5f5f5
+}
 
 .noline{
   border-style: hidden;
@@ -61,9 +63,7 @@ select {
   appearance: none;
 }
 
-tr:hover{ 
-  background-color: #f5f5f5
-}
+
 
 .background_gray, .background_gray:hover{ 
   background-color: #e0e0e0;
@@ -116,6 +116,18 @@ tr:hover{
    color: #fff;
    }
 
-.gray_line tr, .gray_line td {
+.gray_line td {
   border: 1px solid #AAAAAA;
+}
+
+.gray_line_top_bottom td{
+  border-top: 1px solid #AAAAAA;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom: 1px solid #AAAAAA;
+}
+
+.gray_line_right {
+  border-right-style: solid;
+  border-right: 1px solid #AAAAAA;
 }

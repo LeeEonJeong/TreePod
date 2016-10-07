@@ -1,9 +1,9 @@
 <?php
 //session_start();
-include('sessionPush.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('sessionPush.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
 //echo "???";
 //echo $_POST['jobid']."<br/>";
 //$jobRank;
@@ -39,30 +39,20 @@ $jobRank=$_POST['jobRank'];
   //    exit;
   }
   else if ($jobStatus == 1 ) {
-    echo "done!";
 //    echo "<br/>".$jobRank."<br/>";
 //    echo "<script>setCookie('".$_POST['jobid']."', 'done', 1); document.write('되니??');</script>";
 //    echo $jobRank;
     if(isset($result2['jobresult']['virtualmachine']['password'])){
-      echo "<br/>";
+    //  echo "<br/>";
       $displayname = $result2['jobresult']['virtualmachine']['displayname'];
       $password = $result2['jobresult']['virtualmachine']['password'];
-      echo $displayname."의 비밀 번호는 ".$password." 입니다.";
       $_SESSION[$displayname] = $password;
-      var_dump($_SESSION);
-//      session_push('displayname',$result2['jobresult']['virtualmachine']['displayname']);
-//      if(!isset($_SESSION['virtualmachine'])){
-//        $_SESSION['virtualmachine'] = array();
-//      }
-//      array_push($_SESSION['virtualmachine'], $result2['jobresult']['virtualmachine']['displayname']);
-     // echo end($_SESSION['virtualmachine']);
-//      session_push('password',$result2['jobresult']['virtualmachine']['password']);
-//      if(!isset($_SESSION['password'])){
-//        $_SESSION['password'] = array();
-//      }
-//      array_push($_SESSION['password'], $result2['jobresult']['virtualmachine']['password']);
-     // echo end($_SESSION['virtualmachine']);
-    
+    }
+    if(isset($result2['jobresult']['virtualmachine']['state'])){
+      if($result2['jobresult']['virtualmachine']['state'] == "Destroyed") {
+        echo VM_DESTROY;//"VM Destroy ";
+      //  setcookie("VM_destroy", "DONE", time() + 1800);
+      }
     }
     setcookie($_POST['jobid'], "DONE", time() + 1800); //set cookie 30min.
     unset($_SESSION['processID'][$jobRank]);
@@ -70,6 +60,8 @@ $jobRank=$_POST['jobRank'];
 //    var_dump($_SESSION['done']);
 //    echo "<input type='hidden' value='done'/>";
 //    var_dump_enter($result2);
+        echo "done!";
+
   }
   else {
     echo "working now...<img height='17px' src='load.gif'>";

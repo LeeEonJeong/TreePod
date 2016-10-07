@@ -36,7 +36,7 @@
     xhr.send(data);
   }
 
-  function testSeparate(jobid, num){
+/*  function testSeparate(jobid, num){
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'asynchronousPart.php');
     xhr.onreadystatechange = function(){
@@ -49,7 +49,7 @@
     data += "&jobRank="+num;
     xhr.send(data);
     
-  }
+  }*/ //이제 이거 쓰면 큰일난다.
 
   function testSeparate2(jobid, num, timeid){
     var xhr = new XMLHttpRequest();

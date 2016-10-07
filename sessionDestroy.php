@@ -1,5 +1,5 @@
 <?php 
-include('alert.html');
+include('customAlert.html');
 	session_start();
 	session_destroy();
 	foreach($_COOKIE as $key=>$val){ 

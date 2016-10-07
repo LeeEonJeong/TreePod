@@ -11,40 +11,68 @@ table,tr,td{
     border-collapse: collapse;
 }
 </style>
-
+<?php
+include_once('customAlert.html');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
+?>
 <script>
 
 function destroyVM(num){
 //  alert(document.forms[num]);
-  document.forms[num].action = 'destroyVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
+  var server = document.getElementById('server_state_form');
+  server.action = 'destroyVM.php';
+  server.method = 'post';
+  server.submit();
 }
 function startVM(num){
-//  alert(document.forms[num]);
-  document.forms[num].action = 'startVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
+
+  var server = document.getElementById('server_state_form');
+  server.action = 'startVM.php';
+  server.method = 'post';
+  server.submit();
 }
 function stopVM(num){
-//  alert(document.forms[num]);
-  document.forms[num].action = 'stopVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
+  var server = document.getElementById('server_state_form');
+  server.action = 'stopVM.php';
+  server.method = 'post';
+  server.submit();
+}
+
+function stateClose(){
+  document.getElementById('serverState').style.display="none";
+}
+
+ function isVMdeleted(processStart,processEnd){
+    //  alert((processStart));
+    //  alert((processEnd));
+     var findStr = "ne!";// "<?=VM_DESTROY?>";
+      for(i=processStart; i<=processEnd ; i++) {
+        var message = document.getElementById('state'+i).innerHTML;
+        if (message.indexOf(findStr) != -1) {
+        //  Alert.render('서버삭제 ','서버 삭제가 완료 되었습니다. ','default');
+          alert('서버 삭제가 완료 되었습니다.');
+          return true; //원래는 여기가 true;
+        }else {
+
+          
+   //       
+          return false; //원래는 여기가 flase;
+        }
+    }
+
 }
 </script>
 </head>
 <body>
 <?php
-//include('hover_session.php');
-include('head2.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('head2.php');
 ?>
 <br/>
-<table class="noline">
-<tr class="background_gray"><td>서버 명</td><td>상태</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td><td>실행</td></tr>
+<table  class="noline hoverOn">
+<tbody id="myVM">
+<tr class="background_gray"><td>서버 명</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td></tr>
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -66,39 +94,32 @@ for($i=0; $i<$result_num; $i++){
   }else {
     $temp = $result;
   }
-  echo "<tr><form method='post'><td class='view'>";
+  echo "<tr><td class='view'>";
   echo $temp['displayname'];
   echo "</td> <td>";
-  echo "<input type='hidden' name='id' value='".$temp['id']."'/>";
-  echo $temp['state'];
-  echo "</td> <td>";
   echo $temp['zonename'];
-  echo "<input type='hidden' name='zoneid' value='".$temp['zoneid']."'/>";
   echo "</td> <td>";
   echo $temp['serviceofferingname'];
-  echo "<input type='hidden' name='serviceofferingid' value='".$temp['serviceofferingid']."'/>";
   echo "</td> <td>";
   echo $temp['templatedisplaytext'];
-  echo "<input type='hidden' name='templateid' value='".$temp['templateid']."'/>";
   echo "</td> <td>"; 
   echo $temp['created'];
-  echo "</td> <td>";
-    
-  if($temp['displayname'] != "jjkserver") {
-    if($temp['state']=="Running") {?>
-    <input type='button' class="button2" value='중지' onclick="stopVM('<?=$i?>')"/></td></tr></form>
-<?php 
-    } else { ?>
-    <input type='button' class="button2" value='시작' onclick="startVM('<?=$i?>')"/>
-    <input type='button' class="button2" value='삭제' onclick="destroyVM('<?=$i?>')"/></td></tr></form>
-   
-<?php
-    }
-  }
-   echo  "<tr id='".$temp['displayname']."' class='lower_level'></tr>";
+  echo "</td> </tr>";
+
+  echo  "<tr id='".$temp['displayname']."' class='lower_level'></tr>";
 }
 
 ?>
+</tbody>
+</table>
+
+<table style="display: none"class="gray_line_top_bottom" id = "serverState">
+<!--<tr  class="background_gray">
+  <td style="text-align: left" colspan='2'>(서버이름)</td>
+  <td style="text-align: right"><div id="serverStateClose">X </div></td>
+</tr>
+<tr  ><td>상태</td><td>running?</td><td><form>실행 버튼들</form></td></tr>-->
+
 </table>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -123,6 +144,40 @@ $(document).ready(function(){
         var postVal = this.innerHTML;
         document.getElementById(postVal).innerHTML="";
     });
+  $('.view').click(function(){
+    var postVal = this.innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','vmState.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'displayname='+postVal;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+        //  document.querySelector('.password').innerHTML = xhr.responseText;
+          document.getElementById('serverState').innerHTML = xhr.responseText; 
+        }
+      }
+    $('#serverState').show();
+    
+  }) // 이부분 javascript로 바꾸면 됨!
+
+
+  $('#myVM').mouseover(function(){
+     if(isVMdeleted(span_start,span_end) == true){
+        span_start = 2;
+        span_end = 1;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','renewMyServer.php');
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200) {
+           document.querySelector('#myVM').innerHTML = xhr.responseText;
+           }
+        }
+        xhr.send();
+        alert("ajax use");
+     }
+  });
+  //isVMdeleted(timeid_num));
 
 });
 </script>

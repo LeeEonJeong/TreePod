@@ -1,3 +1,5 @@
+<?php 
+include_once('api_constants.php');?>
 
 <!--  <p>state : <span id="state"></span></p> -->
 <link rel="stylesheet" type="text/css" href="design.css">
@@ -51,16 +53,15 @@
   </script>
   <script>
     function test2(asd){
-      alert(document.getElementById('state').value);
+      alert(document.getElementById('state'+asd).value);
     }  
+
+    var span_start=2;
+    var span_end=1;
   </script>
 
 <?php
         @session_start();
-     //   echo "SESSION[processID] : ";  var_dump($_SESSION['processID']);
-//var_dump($SESSION);
-//        $_SESSOION['protforwarding']='protForwarding now.';
-      //  echo "<p>tttttt</p>";
         if(!isset($_SESSION['processID'])){
            echo "<p><span>요청 하신 작업이 없습니다.</span></p>";
         }
@@ -68,14 +69,16 @@
             echo "<p>요청 하신 작업이 없습니다.</p>"; 
         }
         else if(count($_SESSION['processID'])!=0){ 
-        //  for($i=0; $i<count($_SESSION['processID']); $i++) {
           $timeID=0; 
           foreach($_SESSION['processID'] as $key => $value ) {
             $timeID++;
             ?>
-            <p><?=$_SESSION['processID'][$key]?> : <span id="state<?= $key ?>"></span></p>
+            <p><?=$_SESSION['processID'][$key]?> :<span id="state<?= $key ?>"></span></p>
             <script>
-              
+      <?php if($timeID==1) { ?>
+              span_start = <?= $key?>;
+      <?php } ?>
+            span_end =  <?= $key?>  ;
               var timeid = setInterval("testSeparate2('<?= $_SESSION['processID'][$key] ?>','<?= $key ?>', '<?= $timeID?>')", 3000);
             </script>
 <?php 
@@ -86,7 +89,6 @@
     //      var_dump($_SESSION['timeID']);
         } 
 ?>
-
 
 </div>
 

@@ -19,12 +19,10 @@ function CustomAlert(){
             document.getElementById('dialogboxfoot').innerHTML = foot;
         }
 
-        return result;
     }
 	this.ok = function(){
 		document.getElementById('dialogbox').style.display = "none";
 		document.getElementById('dialogoverlay').style.display = "none";
-        result = true;
 	}
 }
 var Alert = new CustomAlert();

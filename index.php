@@ -32,10 +32,10 @@ function stopVM(num){
 </head>
 <body>
 <?php
-include('head2.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('head2.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
 //include('alert.html');
 ?>
 <br/>
