@@ -13,7 +13,6 @@ include_once('var_dump_enter.php');
 ?>
 </head>
 <body>
-
 <tr class="background_gray"><td>서버 명</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td></tr>
 <?php
 
@@ -36,7 +35,7 @@ for($i=0; $i<$result_num; $i++){
   }else {
     $temp = $result;
   }
-  echo "<tr><td class='view'>";
+  echo "<tr><td class='view' onmouseover = 'viewPassword(this)' onmouseout='hiddenPassword(this)' onclick='showVMState(this)'>";
   echo $temp['displayname'];
   echo "</td> <td>";
   echo $temp['zonename'];

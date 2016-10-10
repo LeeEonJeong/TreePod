@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8"/>
-
-</head>
-<body>
 
 
 <?php
@@ -69,7 +62,3 @@ if($temp['displayname'] != "jjkserver") {
 </form>
 </td>
 </tr>
-
-
-</body>
-</html>

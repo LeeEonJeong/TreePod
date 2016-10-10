@@ -6,10 +6,10 @@
 <meta charset="utf-8"/>
 </head><body>
 <?php
-include('head.html');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('sessionPush.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
 //  var_dump_enter($_POST);
 
  $cmdArr = array (
@@ -21,23 +21,29 @@ include('var_dump_enter.php');
     "virtualmachineid" => $_POST['virtualmachineid'],
     "apikey" => API_KEY
  );
+ if($_POST['publicendport'] != "") {
+ 	$cmdArr['publicendport'] = $_POST['publicendport'];
+ }
+ if($_POST['privateendport'] != "" ) {
+ 	$cmdArr['privateendport'] = $_POST['privateendport'];
+ }
 // var_dump_enter($cmdArr);
+ 
  $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
+ set_time_limit(600);
+
  $result = callCommand($URL, $cmdArr, SECERET_KEY);
 // var_dump_enter($result);
 
-//비동기화 하는 부분.
-// sleep(1);
-// $result["jobid"];
-//echo "<br/>";
-//echo $result["jobid"];
 ?>
 
 
-<input type="button" id="execute" value="execute" onclick="test('<?=$result['jobid']?>')"/>
+
 <script src="asy.js"></script>
-<a href="listPulbicIP.php">내 공인 IP 보기</a>
-<a href="index.php">홈으로 가기</a>
+<?php
+  session_push('processID',$result['jobid']);
+    echo "<script>alert('포트 포워딩 신청이 완료 되었습니다.');location.replace('listPublicIP.php');</script>";
+?>
 </body>
 
 </html>

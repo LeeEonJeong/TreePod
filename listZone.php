@@ -19,11 +19,9 @@ include('var_dump_enter.php');
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 
 $listProductcmdArr = array(
-//    "command" => "listAvailableProductType", //잘못된 명령어 .
   "command" => "listZones",
   "available" => "true",
-   // "wntjr" => "najong_e_jusuk_",
-    "apikey" => API_KEY
+  "apikey" => API_KEY
 );
 $seceret_key = SECERET_KEY;
 $result = callCommand($URL, $listProductcmdArr, $seceret_key);

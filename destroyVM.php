@@ -7,7 +7,6 @@
 </head>
 <body>
 <?php
-include_once('head.html');
 include_once('api_constants.php');
 include_once('./callAPI.php');
 include_once('var_dump_enter.php');

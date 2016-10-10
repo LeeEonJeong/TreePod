@@ -47,7 +47,7 @@ function stateClose(){
  function isVMdeleted(processStart,processEnd){
     //  alert((processStart));
     //  alert((processEnd));
-     var findStr = "ne!";// "<?=VM_DESTROY?>";
+     var findStr = "<?=VM_DESTROY?>";
       for(i=processStart; i<=processEnd ; i++) {
         var message = document.getElementById('state'+i).innerHTML;
         if (message.indexOf(findStr) != -1) {
@@ -61,8 +61,69 @@ function stateClose(){
           return false; //원래는 여기가 flase;
         }
     }
-
 }
+
+function viewPassword(t){
+    var postVal = t.innerHTML;
+   // alert(postVal);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','view_password.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'displayname='+postVal;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+        //  document.querySelector('.password').innerHTML = xhr.responseText;
+          document.getElementById(postVal).innerHTML = xhr.responseText; 
+        }
+      }
+  }
+
+  function hiddenPassword(t){
+    var postVal = t.innerHTML;
+        document.getElementById(postVal).innerHTML="";
+  }
+
+  function showVMState(t){
+    var postVal = t.innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','vmState.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'displayname='+postVal;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+        //  document.querySelector('.password').innerHTML = xhr.responseText;
+          document.getElementById('serverState').innerHTML = xhr.responseText; 
+        //  alert(xhr.responseText);
+        }
+      }
+    document.getElementById('serverState').style.display = 'table';
+  }
+
+
+
+  function renewMyServer(){
+//    alert('renewMyServer');
+
+    if(isVMdeleted(span_start,span_end) == true){
+        span_start = 2;
+        span_end = 1;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','renewMyServer.php');
+        xhr.onreadystatechange = function(){
+        //  alert(xhr.responseText);
+          if(xhr.readyState === 4 && xhr.status === 200) {
+            document.querySelector('#myVM').innerHTML = xhr.responseText;
+          //  alert(xhr.responseText);
+          }
+        }
+        xhr.send();
+        // alert("ajax use");
+        stateClose();
+     }
+
+  }
 </script>
 </head>
 <body>
@@ -71,7 +132,7 @@ include_once('head2.php');
 ?>
 <br/>
 <table  class="noline hoverOn">
-<tbody id="myVM">
+<tbody id="myVM" onmouseover='renewMyServer()'>
 <tr class="background_gray"><td>서버 명</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td></tr>
 <?php
 
@@ -94,7 +155,7 @@ for($i=0; $i<$result_num; $i++){
   }else {
     $temp = $result;
   }
-  echo "<tr><td class='view'>";
+  echo "<tr><td class='view' onmouseover = 'viewPassword(this)' onmouseout='hiddenPassword(this)' onclick='showVMState(this)'>";
   echo $temp['displayname'];
   echo "</td> <td>";
   echo $temp['zonename'];
@@ -113,74 +174,16 @@ for($i=0; $i<$result_num; $i++){
 </tbody>
 </table>
 
-<table style="display: none"class="gray_line_top_bottom" id = "serverState">
-<!--<tr  class="background_gray">
+<table style="display: none" class="gray_line_top_bottom" id="serverState">
+<!--<tbody id="serverState">
+<tr  class="background_gray">
   <td style="text-align: left" colspan='2'>(서버이름)</td>
   <td style="text-align: right"><div id="serverStateClose">X </div></td>
 </tr>
-<tr  ><td>상태</td><td>running?</td><td><form>실행 버튼들</form></td></tr>-->
-
+<tr  ><td>상태</td><td>running?</td><td><form>실행 버튼들</form></td></tr>
+</tbody> -->
 </table>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  $('.view').mouseover(function(event){
-    var postVal = this.innerHTML;
-   // alert(postVal);
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST','view_password.php');
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    var data = 'displayname='+postVal;
-    xhr.send(data);
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200) {
-        //  document.querySelector('.password').innerHTML = xhr.responseText;
-          document.getElementById(postVal).innerHTML = xhr.responseText; 
-        }
-      }
-  }); 
-  $(".view").mouseout(function(){
-        var postVal = this.innerHTML;
-        document.getElementById(postVal).innerHTML="";
-    });
-  $('.view').click(function(){
-    var postVal = this.innerHTML;
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST','vmState.php');
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    var data = 'displayname='+postVal;
-    xhr.send(data);
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200) {
-        //  document.querySelector('.password').innerHTML = xhr.responseText;
-          document.getElementById('serverState').innerHTML = xhr.responseText; 
-        }
-      }
-    $('#serverState').show();
-    
-  }) // 이부분 javascript로 바꾸면 됨!
-
-
-  $('#myVM').mouseover(function(){
-     if(isVMdeleted(span_start,span_end) == true){
-        span_start = 2;
-        span_end = 1;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET','renewMyServer.php');
-        xhr.onreadystatechange = function(){
-          if(xhr.readyState === 4 && xhr.status === 200) {
-           document.querySelector('#myVM').innerHTML = xhr.responseText;
-           }
-        }
-        xhr.send();
-        alert("ajax use");
-     }
-  });
-  //isVMdeleted(timeid_num));
-
-});
-</script>
 
 </body>
 

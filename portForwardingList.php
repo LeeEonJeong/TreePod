@@ -2,18 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<style>
-table,tr,td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-</style>
+
 </head><body>
 <?php
-include('head2.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
 //  var_dump_enter($_POST);
  $cmdArr = array (
     "command" => "listPortForwardingRules",
@@ -32,9 +26,9 @@ if(count($result)!=0){
 }
    ?>
  
- <table>
- <tr><td colspan="4"><?=$_POST['ipaddress']?></td></tr>
- <tr><td>서버</td><td>공용번호</td><td>내부번호</td><td>-</td></tr>
+ <tr class="background_gray"><td style="text-align: left" colspan="3"><b><?=$_POST['ipaddress']?></b></td>
+ <td style="text-align: right"><div onclick="stateClose()">X</div></td></tr>
+ <tr  class="background_gray"><td>서버</td><td>외부번호</td><td>내부번호</td><td>-</td></tr>
  <?php
  for($i=0; $i<$num; $i++){
    if($num != '1' ) {
@@ -42,18 +36,22 @@ if(count($result)!=0){
   }else {
      $temp = $result;
   }?>
-  <tr><form action="deletePortForwarding.php" method="post"/>
-  <input name="id" type="hidden" value="<?= $temp['id']?>"/>
+
+    <tr>
+    
+ 
   <td><?= $temp['virtualmachinedisplayname'];?></td>
-  <td><?= $temp['privateport'];?>-<?= $temp['privateendport'];?></td>
   <td><?= $temp['publicport'];?>-<?= $temp['publicendport'];?></td>
-  <td><input type="submit" value="삭제"/></td>
-  </form></tr>
+  <td><?= $temp['privateport'];?>-<?= $temp['privateendport'];?></td>
+  <td style="width:20%">
+  <form  method="post"/>
+   <input name="id" type="hidden" value="<?= $temp['id']?>"/>
+  <!-- <input type="submit" class="button2" value="수정"/> -->
+  <input type="button" onclick="deletePortForwardingRules('<?=$i?>')" class="button2" value="삭제"/></td>
+  </form>
+ </tr>  
   <?php
  }
 ?>
-</table>
-<a href="listPulbicIP.php">내 공인 IP 보기</a>
-<a href="index.php">홈으로 가기</a>
 </body>
 </html>

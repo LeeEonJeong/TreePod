@@ -17,8 +17,8 @@ include_once('api_constants.php');?>
 </li>
 <li><a href="javascript:vold(0)">IP</a>
   <ul>
-    <li><a href="#">My Public IP</a></li>
-    <li><a href="#">Firewall Rules</a></li>
+    <li><a href="listPublicIP.php">My Public IP</a></li>
+    <li><a href="listFireWareRules.php">Firewall Rules</a></li>
 
   </ul>
 </li>
