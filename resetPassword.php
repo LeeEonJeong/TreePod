@@ -1,4 +1,4 @@
-<?php session_start();?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,20 +14,24 @@ include_once('sessionPush.php');
 var_dump_enter($_POST);
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
-$startcmdArr = array(
-    "command" => "startVirtualMachine",
+$stopcmdArr = array(
+    "command" => "resetPasswordForVirtualMachine",
     "id" => $_POST['id'],
     "apikey" => API_KEY
 );
-var_dump_enter($startcmdArr);
+var_dump_enter($stopcmdArr);
 $seceret_key = SECERET_KEY;
-$result = callCommand($URL, $startcmdArr, $seceret_key);
+//exit;
+$result = callCommand($URL, $stopcmdArr, $seceret_key);
 set_time_limit(600);
 $jobId = $result["jobid"];
-
 echo $jobId;
 
- session_push('processID',$result['jobid']);
+if(!isset($result['jobid'])){
+  alert("error");
+  echo "<script>location.replace('myServer.php');</script>";
+}
+  session_push('processID',$result['jobid']);
  echo "<script>location.replace('myServer.php');</script>";
 ?>
 </body>

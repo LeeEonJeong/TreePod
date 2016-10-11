@@ -3,12 +3,12 @@
   }
 
   function firewall(num){
-
+  //  alert("firewall");
     document.getElementById('viewer').style.display="table-row-group";
     var ipaddressid = document.forms[num].ipaddressid.value;
     var ipadrressname = document.forms[num].ipaddress.value;
     var xhr = new XMLHttpRequest();
-    xhr.open('POST','fireWallList.php'); //fix it
+    xhr.open('POST','fireWallRulesList.php'); //fix it
     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     var data = 'ipaddressid='+ipaddressid;
     data += '&ipaddress='+ ipadrressname;
@@ -20,13 +20,13 @@
     }
   }
 
-  function addFireWallRules(num){
+  function addFireWall(num){
 
     document.getElementById('viewer').style.display="table-row-group";
     var ipaddressid = document.forms[num].ipaddressid.value;
     var ipadrressname = document.forms[num].ipaddress.value;
     var xhr = new XMLHttpRequest();
-    xhr.open('POST','fireWallAdd.php'); //fix it
+    xhr.open('POST','fireWallRulesAdd.php'); //fix it
     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     var data = 'ipaddressid='+ipaddressid;
     data += '&ipaddress='+ ipadrressname;
@@ -42,7 +42,22 @@
 
   function deleteFireWallRules(num){
     num = parseInt(num) + parseInt(publicIp_length);
-    document.forms[num].action = 'deletePortForwarding.php';
+    document.forms[num].action = 'deleteFireWallRules.php';
     document.forms[num].method = "post";
     document.forms[num].submit();
+  }
+
+  function addFireWallRules(){
+    var startPort = document.getElementById('startport').value;
+    var endPort = document.getElementById('endport').value;
+    var protocol = document.getElementById('protocol').value;
+    var cidrList = document.getElementById('cidrlist').value;
+
+    var form = document.getElementById('addFireWallForm');
+    form.action ="fireWallRulesCreate.php";
+    form.startport.value = startPort;
+    form.endport.value = endPort;
+    form.protocol.value = protocol;
+    form.cidrlist.value = cidrList;
+    form.submit();
   }

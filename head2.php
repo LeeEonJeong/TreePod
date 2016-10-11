@@ -11,21 +11,21 @@ include_once('api_constants.php');?>
 <li><a href="index.php">HOME</a></li>
 <li><a href="javascript:vold(0)">Server</a>
   <ul>
-    <li><a href="myServer.php">My Server</a></li>
     <li><a href="availableList.php">New Server</a></li>
+    <li><a href="myServer.php">My Server</a></li>
   </ul>
 </li>
 <li><a href="javascript:vold(0)">IP</a>
   <ul>
+    <li><a href="newPublicIP.php">New Public IP</a></li>
     <li><a href="listPublicIP.php">My Public IP</a></li>
-    <li><a href="listFireWareRules.php">Firewall Rules</a></li>
-
+    <li><a href="listFireWallRules.php">Firewall Rules</a></li>
   </ul>
 </li>
 <li><a href="javascript:vold(0)">Volume</a>
   <ul>
-    <li><a href="#">My Volume</a></li>
-    <li><a href="#">New Volume</a></li>
+    <li><a href="newVolume.php">New Volume</a></li>
+    <li><a href="listVolume.php">My Volume</a></li>
 
   </ul>
 </li>

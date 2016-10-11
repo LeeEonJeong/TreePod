@@ -68,7 +68,7 @@ function callCommand($URL, $cmdArr, $SECRET)
         if($str == FALSE) {
         //    var_dump_enter($str);
             echo "<br/>ERROR in API<br/>";
-            return "ERROR";
+            return array("jobid"=>"ERROR");
         }
     //  echo "<pre>".htmlentities($str)."</pre>";
         $obj = simplexml_load_string($str);

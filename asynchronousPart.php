@@ -34,6 +34,7 @@ $jobRank=$_POST['jobRank'];
 //  echo "<br/>";
   if ($jobStatus == 2) {
     echo "work fail!<br/>";
+    unset($_SESSION['processID'][$jobRank]);
    // var_dump_enter($result2);
    //  printf($result2["jobresult"]);
   //    exit;
@@ -47,6 +48,7 @@ $jobRank=$_POST['jobRank'];
       $displayname = $result2['jobresult']['virtualmachine']['displayname'];
       $password = $result2['jobresult']['virtualmachine']['password'];
       $_SESSION[$displayname] = $password;
+      echo "password produced ";
     }
     if(isset($result2['jobresult']['virtualmachine']['state'])){
       if($result2['jobresult']['virtualmachine']['state'] == "Destroyed") {

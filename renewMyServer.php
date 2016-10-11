@@ -17,7 +17,7 @@ include_once('var_dump_enter.php');
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
-
+sleep(2);
 $listProductcmdArr = array(
     "command" => "listVirtualMachines",
     "apikey" => API_KEY

@@ -56,28 +56,19 @@
     var publicPort = document.getElementById('publicport').value;
     var privateEndPort = document.getElementById('privateendport').value;
     var publicEndPort = document.getElementById('publicendport').value;
+  //  var cidrList = document.getElementById('cidrlist').value;
+    var openFireWall = document.getElementById('openfirewall').value;
     var virtualMachineId = document.getElementById('virtualmachineid').value;
+    var protocol = document.getElementById('protocol').value;
     var form = document.getElementById('addPortForm');
+  //  form.action = "portForwarding.php";
     form.publicport.value = publicPort;
     form.privateport.value = privatePort;
     form.publicendport.value = publicEndPort;
     form.privateendport.value = privateEndPort;
     form.virtualmachineid.value = virtualMachineId;
+    form.protocol.value = protocol;
+  //  form.cidrlist.value = cidrList;
+    form.openfirewall.value = openFireWall;
     form.submit();
-  }
-
-  function showNewIP(){
-    var tr = document.getElementById('newIP');
-    var tr_input = document.getElementById('newIPInput');
-    var but = document.getElementById('newIPButton');
-    if(tr.style.display=='none') {
-      tr.style.display='table-row';  
-      tr_input.style.display='table-row';
-      but.innerHTML='창 닫기';
-    } else {
-      tr.style.display='none';  
-      tr_input.style.display='none';
-      but.innerHTML='새로운 공인 IP 등록';
-    }
-    
   }

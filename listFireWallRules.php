@@ -10,7 +10,7 @@ $(document).ready(function(){
 //  alert(publicIp_length);
 });
 </script>
-<script src="portForwarding.js">
+<script src="fireWallRules.js">
 </script>
 </head><body>
 
@@ -19,21 +19,6 @@ include_once('head2.php');
 include_once('api_constants.php');
 include_once('./callAPI.php');
 include_once('var_dump_enter.php');
- $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
-
-/*
-$listProductcmdArr = array(
-  "command" => "listZones",
-  "available" => "true",
-  "apikey" => API_KEY
-); 
-
-$result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
-*/
- ?>
-
-
-<?php
 
  $cmdArr = array (
     "command" => "listPublicIpAddresses",
@@ -52,7 +37,7 @@ $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
 
 
 <tr><td></td></tr>
-<tr class="background_gray"><td><b>ip번호</b></td><td><b>지역</b></td><td><b>포트포워딩 조회</b></td><td><b>포트포워딩 등록</b></td><td><b>삭제</b></td></tr>
+<tr class="background_gray"><td><b>ip번호</b></td><td><b>지역</b></td><td><b>방화벽 규칙 조회</b></td><td><b>방화벽 규칙 등록</b></td></tr>
 
 <?php 
 for($i=0; $i<$num; $i++){ 
@@ -62,7 +47,7 @@ for($i=0; $i<$num; $i++){
      $temp = $result;
   }?>
   <tr>
-  <form action='PublicIPDelete.php' method='post'>
+  <form method='post'>
   <td style="width:25%" ><?= $temp['ipaddress'] ?>
   <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
   <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>
@@ -70,15 +55,9 @@ for($i=0; $i<$num; $i++){
   <td>
   <?=$temp['zonename']?>
   </td>
-  <td style="width:20%"><input type='button' class='button2' value='조회' onclick="portForwarding('<?=$i?>')"/></td>
-  <td style="width:20%"><input type='button' class='button2' value='등록' onclick="addPortForwarding('<?=$i?>')"/></td>
-  <?php
-    if($temp['issourcenat']=="true") {
-      echo "<td><b>-</b></td>";
-    } else {
-    echo "<td><input type='submit' class='button' value='삭제'/></td>";
-    }
-  ?>
+  <td style="width:25%"><input type='button' class='button2' value='조회' onclick="firewall('<?=$i?>')"/></td>
+  <td style="width:25%"><input type='button' class='button2' value='등록' onclick="addFireWall('<?=$i?>')"/></td>
+  
   </form>
   </tr>
  <?php  

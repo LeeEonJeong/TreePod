@@ -45,20 +45,36 @@ for($i=0; $i<$result_num; $i++){
 <input type='hidden' name='zoneid' value='<?= $temp['zoneid']?>'/>
 <input type='hidden' name='serviceofferingid' value='<?= $temp['serviceofferingid']?>'/>
 <input type='hidden' name='templateid' value='<?= $temp['templateid']?>'/>
+</form>
+
 <?php
 if($temp['displayname'] != "jjkserver") {
     if($temp['state']=="Running") {?>
-    <input type='button' class="button2" value='중지' onclick="stopVM('0')"/>
+    <input type='button' class="button2" value='중지' onclick="stopVM()"/>
+    <input type='button' class="button2" value='재부팅' onclick="restartVM()"/>
 <?php 
     } else if($temp['state']=="Stopped"){ ?>
-    <input type='button' class="button2" value='시작' onclick="startVM('0')"/>
-    <input type='button' class="button2" value='삭제' onclick="destroyVM('0')"/>
+    <input type='button' class="button2" value='시작' onclick="startVM()"/>
 <?php
     } else {
       echo "-";
     }
   } else { echo "이 서버는 건드리지 마시오."; }
 ?>
-</form>
 </td>
+</tr>
+<tr>
+  <td colspan="3">
+<?php
+if($temp['displayname'] != "jjkserver") {
+  if($temp['state']=="Stopped"){ ?>
+    <input type='button' class="button" value='VM 삭제' onclick="destroyVM()"/>
+<?php
+  }
+  if($temp['state']=="Stopped" || $temp['state']=="Running") {?> 
+  <input type='button' class='button' value='비밀번호 초기화' onclick="resetPassword()"/>
+<?php 
+  } else { echo "-"; }
+}else { echo "-";}?>
+  </td>
 </tr>

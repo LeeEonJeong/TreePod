@@ -10,10 +10,10 @@
 </head>
 <body>
 <?php
-//include('head2.php');
-include('api_constants.php');
-include ('./callAPI.php');
-include('var_dump_enter.php');
+include_once('api_constants.php');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
+include_once('sessionPush.php');
 //var_dump_enter($_POST);
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -29,7 +29,7 @@ if ($_POST['diskofferingid']=="rootonly"){
   );
 
 } else {
-  $listProductcmdArr = array(
+  $cmdArr = array(
     "command" => "deployVirtualMachine",
     "serviceofferingid" => $_POST['serviceofferingid'],
     "templateid" => $_POST['templateid'],
@@ -41,8 +41,8 @@ if ($_POST['diskofferingid']=="rootonly"){
   );
 }
 //var_dump_enter($listProductcmdArr);
-
-$result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
+exit;
+$result = callCommand($URL, $cmdArr, SECERET_KEY);
 set_time_limit(600);
 /*
 sleep(30);
@@ -71,11 +71,8 @@ do {
 <script src="asy.js">
 </script>
 <?php
-   if(!isset($_SESSION['processID'])){
-      $_SESSION['processID'] = array();
-   }
-    array_push($_SESSION['processID'], $result['jobid']);
-    echo end($_SESSION['processID']);
+
+    session_push('processID',$result['jobid']);
     echo "<script>location.replace('myServer.php');</script>";
 ?>
 

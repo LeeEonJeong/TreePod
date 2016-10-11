@@ -10,31 +10,33 @@ include_once('sessionPush.php');
 include_once('api_constants.php');
 include_once('./callAPI.php');
 include_once('var_dump_enter.php');
-//  var_dump_enter($_POST);
+  var_dump_enter($_POST);
 
  $cmdArr = array (
     "command" => "createPortForwardingRule",
     "ipaddressid" => $_POST['ipaddressid'],
-    "privateport" => $_POST['privateport'],
-    "protocol" => 'TCP',
+    "privateport" => $_POST['privateport'], // 방화벽 해야 함.
+    "protocol" =>  $_POST['protocol'],
     "publicport" => $_POST['publicport'],
     "virtualmachineid" => $_POST['virtualmachineid'],
+    "openfirewall" => $_POST['openfirewall'],
     "apikey" => API_KEY
  );
+
  if($_POST['publicendport'] != "") {
  	$cmdArr['publicendport'] = $_POST['publicendport'];
  }
  if($_POST['privateendport'] != "" ) {
  	$cmdArr['privateendport'] = $_POST['privateendport'];
  }
-// var_dump_enter($cmdArr);
- 
+ var_dump_enter($cmdArr);
+
  $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
  set_time_limit(600);
-
+//exit;
  $result = callCommand($URL, $cmdArr, SECERET_KEY);
-// var_dump_enter($result);
-
+ var_dump_enter($result);
+//exit;
 ?>
 
 

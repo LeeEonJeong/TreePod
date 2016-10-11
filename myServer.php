@@ -19,39 +19,48 @@ include_once('var_dump_enter.php');
 ?>
 <script>
 
-function destroyVM(num){
+function destroyVM(){
 //  alert(document.forms[num]);
   var server = document.getElementById('server_state_form');
   server.action = 'destroyVM.php';
   server.method = 'post';
   server.submit();
 }
-function startVM(num){
+function startVM(){
 
   var server = document.getElementById('server_state_form');
   server.action = 'startVM.php';
   server.method = 'post';
   server.submit();
 }
-function stopVM(num){
+function stopVM(){
   var server = document.getElementById('server_state_form');
   server.action = 'stopVM.php';
   server.method = 'post';
   server.submit();
 }
-
+function restartVM(){
+  var server = document.getElementById('server_state_form');
+  server.action = 'restartVM.php';
+  server.method = 'post';
+  server.submit();
+}
+function resetPassword(){
+  var server = document.getElementById('server_state_form');
+  server.action = 'resetPassword.php';
+  server.method = 'post';
+  server.submit(); 
+}
 function stateClose(){
   document.getElementById('serverState').style.display="none";
 }
 
  function isVMdeleted(processStart,processEnd){
-    //  alert((processStart));
-    //  alert((processEnd));
+
      var findStr = "<?=VM_DESTROY?>";
       for(i=processStart; i<=processEnd ; i++) {
         var message = document.getElementById('state'+i).innerHTML;
         if (message.indexOf(findStr) != -1) {
-        //  Alert.render('서버삭제 ','서버 삭제가 완료 되었습니다. ','default');
           alert('서버 삭제가 완료 되었습니다.');
           return true; //원래는 여기가 true;
         }else {
