@@ -37,7 +37,10 @@ for($i=0; $i<$result_num; $i++){
   <td style="text-align: right"><div id="serverStateClose" onclick="stateClose()">X </div></td>
 </tr>
 <tr>
-  <td style='width: 20%;'><b>상태</b> </td><td style='width: 30%'><?= $temp['state']?></td>
+  <td><b>네트워크 정보</b></td><td>사설 IP<br><?= $temp['nic']['ipaddress']?></td><td>gate way<br><?= $temp['nic']['gateway']?></td>
+</tr>
+<tr>
+  <td style='width: 20%;'><b>실행상태</b> </td><td style='width: 40%'><?= $temp['state']?></td>
 
 <td>
 <form method="post" id="server_state_form">

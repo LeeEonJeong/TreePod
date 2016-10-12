@@ -1,9 +1,7 @@
-<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
-
 </head>
 <body>
 <?php
@@ -23,17 +21,16 @@ $destroycmdArr = array(
 );
 var_dump_enter($destroycmdArr);
 $seceret_key = SECERET_KEY;
+//exit;
 $result = callCommand($URL, $destroycmdArr, $seceret_key);
-sleep(1);
+set_time_limit(600);
 $jobId = $result["jobid"];
+
 echo $jobId;
 
-if(!isset($result['jobid'])){
-  alert("error");
+if(session_push('processID',$result['jobid'])==true)
   echo "<script>location.replace('myServer.php');</script>";
-}
-  session_push('processID',$result['jobid']);
-  echo "<script>location.replace('myServer.php');</script>";
+
 ?>
 </body>
 </html>

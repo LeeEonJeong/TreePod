@@ -8,7 +8,9 @@
 
 
 <script type="text/javascript">
-function isEnglihOrNum(str){
+function isEnglihOrNum(){
+    var form = document.getElementById('sendform');
+    var str = form.name.value;
     var err = 0; 
   
     for (var i=0; i<str.length; i++)  { 
@@ -19,38 +21,28 @@ function isEnglihOrNum(str){
     }    
 
     if (err > 0) { 
+        alert('영어와 숫자만 입력해 주세요.');
+        form.name.value = "";
+        form.name.focus();
         return false;
     }
     return true; 
 }
 
-function checkDisplayName() {
-    var dis = document.getElementById('sendform').displayname.value;
-    if(dis==""){ 
-        alert("서버 이름을 입력해 주세요."); 
-        document.getElementById('sendform').displayname.focus();
-        return false;
-    }
-    else if(isEnglihOrNum(dis)==false){
-        alert("영문및 숫자만 사용 가능 합니다."); 
-        document.getElementById('sendform').displayname.focus();
-        return false;
-    }
-    else{
-        window.open("diskNameCheckSubmit.php?server_name="+dis,'','left=300, top=300, width=400, height=300, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, copyhistory=no, resizable=no');
-    }
-}
 function submitForm(){
     var form = document.getElementById('sendform');
-  //  alert(form.displayname.value);
-    if(form.displayname.readOnly != true){
+    if(form.name.value=="") {
+        alert('Disk 이름을 입력해 주세요.');
+        return false;
+    }
+    if( isEnglihOrNum() == false){
 
-        alert("서버 명 중복 체크를 해주세요.");
-      //  return false;
+        alert('영어와 숫자만 입력해 주세요.');
+        return false;
     }
 
     form.method="post";
-    form.action="test.php";
+    form.action="volumeCreate.php";
     form.submit();
     Alert.render('DISK 신청','화면이 바뀔 때 까지<br>잠시만 기다려 주십시요.... ','');
 }
@@ -84,8 +76,8 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 <tr>
 
     <td class="tweenty_width">Disk 이름</td>
-    <td><input class="transparent" type="text" name="displayname" value=""/></td>
-    <td class="tweenty_width"><input type="button" value="중복 확인" class="button2" onclick="checkDisplayName()"/></td>
+    <td><input class="transparent" type="text" name="name" id="name" value="" onblur="isEnglihOrNum()"/></td>
+
 </tr>
 
 <tr>
@@ -145,7 +137,7 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
   </td>
 
 <tr><td colspan="3">
-    <input type='button' value='제출' class='button' onclick="submitForm()"/>
+    <input type='button' value='신청' class='button' onclick="submitForm()"/>
 <!--    <input type='text' name='templateid' value='' />
 <input type='text' name="serviceofferingid" value='' /> -->
 </td></tr>

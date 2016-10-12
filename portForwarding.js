@@ -3,7 +3,7 @@
   }
 
   function portForwarding(num){
-    num = parseInt(num)+1;
+    num = parseInt(num);
     document.getElementById('viewer').style.display="table-row-group";
     var ipaddressid = document.forms[num].ipaddressid.value;
     var ipadrressname = document.forms[num].ipaddress.value;
@@ -21,7 +21,7 @@
   }
 
   function addPortForwarding(num){
-    num = parseInt(num)+1;
+    num = parseInt(num);
     document.getElementById('viewer').style.display="table-row-group";
     var ipaddressid = document.forms[num].ipaddressid.value;
     var ipadrressname = document.forms[num].ipaddress.value;

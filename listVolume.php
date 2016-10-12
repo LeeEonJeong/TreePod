@@ -10,12 +10,31 @@ function makeByteToGB(byte){
 }
 
  var publicIp_length;
-
-$(document).ready(function(){
-   publicIp_length = document.forms.length;
-
-});
-
+ function serverAttach(){
+  var form = document.getElementById('serverForm');
+  if(form.virtualmachineid.value=="") return false;
+  form.action="volumeAttach.php";
+  form.method = 'post';
+  form.submit();
+ }
+ function showDiskState(t){
+    var postVal = t.innerHTML;
+//    var zoneid = document.getElementById(postVal+'_zone').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','volumeState.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'displayname='+postVal;
+  //  data = data + '&zoneid='+zoneid;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+        //  document.querySelector('.password').innerHTML = xhr.responseText;
+          document.getElementById('diskState').innerHTML = xhr.responseText; 
+        //  alert(xhr.responseText);
+        }
+      }
+    document.getElementById('diskState').style.display = 'table';
+  }
 </script>
 <script src="">
 
@@ -61,28 +80,38 @@ for($i=0; $i<$num; $i++){
      $temp = $result;
   }?>
   <tr>
-  <form method='post'>
-  <td ><?= $temp['name'] ?>
-  <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
-  <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>
-  </td>
+  <td class='view' onclick="showDiskState(this)"><?= $temp['name'] ?></td>
   <td>
   <?=$temp['zonename']?>
+
+  <form method='post'> 
+  <input id='<?=$temp['name']?>_zone' type='hidden' value='<?= $temp['zoneid']?>'/>
+  <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
+  <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>
+  </form>
+
   </td>
   <td ><?= $temp['type']?></td>
   <td > <script>makeByteToGB('<?=$temp['size']?>');</script>  </td>
   <td><?=$temp['created']?></td>
-  </form>
   </tr>
  <?php  
  }
 ?>
 </table>
 
-<table  class="gray_line_top_bottom">
-<tbody style="display: none" id = "viewer">
-</tbody>
 </table>
+
+<table style="display: none" class="gray_line" id="diskState">
+<!--<tbody id="serverState">
+<tr  class="background_gray">
+  <td style="text-align: left" colspan='2'>(서버이름)</td>
+  <td style="text-align: right"><div id="serverStateClose">X </div></td>
+</tr>
+<tr  ><td>상태</td><td>running?</td><td><form>실행 버튼들</form></td></tr>
+</tbody> -->
+</table>
+
 
 </body>
 </html>

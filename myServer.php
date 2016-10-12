@@ -63,10 +63,8 @@ function stateClose(){
         if (message.indexOf(findStr) != -1) {
           alert('서버 삭제가 완료 되었습니다.');
           return true; //원래는 여기가 true;
-        }else {
-
-          
-   //       
+        }else {   
+         // alert('서버 삭제가 완료 되지 않음..');
           return false; //원래는 여기가 flase;
         }
     }
@@ -120,6 +118,7 @@ function viewPassword(t){
         span_end = 1;
         var xhr = new XMLHttpRequest();
         xhr.open('GET','renewMyServer.php');
+        xhr.send();
         xhr.onreadystatechange = function(){
         //  alert(xhr.responseText);
           if(xhr.readyState === 4 && xhr.status === 200) {
@@ -127,7 +126,7 @@ function viewPassword(t){
           //  alert(xhr.responseText);
           }
         }
-        xhr.send();
+       // xhr.send();
         // alert("ajax use");
         stateClose();
      }

@@ -13,6 +13,8 @@ include_once('var_dump_enter.php');
 ?>
 </head>
 <body>
+
+<tr><td colspan="5"><b>- 서버 삭제완료! -</b></td></tr>
 <tr class="background_gray"><td>서버 명</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td></tr>
 <?php
 
@@ -27,7 +29,6 @@ $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
 
 $result_num = $result['count'];
 $result = $result['virtualmachine'];
-//var_dump_enter($result['1']);
 
 for($i=0; $i<$result_num; $i++){
   if($result_num != '1' ) {
@@ -51,7 +52,6 @@ for($i=0; $i<$result_num; $i++){
 }
 
 ?>
-
 
 </body>
 

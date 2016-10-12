@@ -121,9 +121,17 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 
 </tr>
 <tr>
-    <td class="tweenty_width">Data Disk</td><td colspan="2"><select name="diskofferingid" id ="diskofferingid">
+    <td class="tweenty_width">Data Disk</td>
+    <td colspan="2"><select name="diskofferingid" id ="diskofferingid">
         <option value="">yes</option>
         <option value="rootonly">no</option>
+    </select></td>
+</tr>
+<tr>
+    <td>요금제 선택</td>
+    <td colspan="2"><select name="usageplantype" id ="usageplantype">
+        <option value="hourly" selected>시간제</option>
+        <option value="monthly">월 단위</option>
     </select></td>
 </tr>
 <tr><td colspan="3">
@@ -131,6 +139,7 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 <!--    <input type='text' name='templateid' value='' />
 <input type='text' name="serviceofferingid" value='' /> -->
 </td></tr>
+
 </form>
 </tbody>
 </table>
