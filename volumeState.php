@@ -26,7 +26,7 @@ for($i=0; $i<$result_num; $i++){
   }else {
     $temp = $result;
   }
-  if($temp['name']==$_POST['displayname']){
+  if($temp['id']==$_POST['id']){
 
     break;
   }
@@ -37,7 +37,7 @@ for($i=0; $i<$result_num; $i++){
 
 <tr class="background_gray">
   <td style="text-align: left" colspan='3'>
-    <b><?=$_POST['displayname']?></b>
+    <b><?=$temp['name']?></b>
     
   
   </td>

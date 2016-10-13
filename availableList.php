@@ -23,6 +23,7 @@ function isEnglihOrNum(str){
         return false;
     }
     return true; 
+    
 }
 
 function checkDisplayName() {

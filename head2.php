@@ -32,8 +32,8 @@ include_once('api_constants.php');?>
 
 <li><a href="javascript:vold(0)">NAS</a>
   <ul>
-    <li><a href="#">???</a></li>
-    <li><a href="#">???</a></li>
+    <li><a href="newNas.php">New NAS</a></li>
+    <li><a href="listNas.php">My NAS</a></li>
   </ul>
 </li>
 

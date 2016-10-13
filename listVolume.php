@@ -17,13 +17,15 @@ function makeByteToGB(byte){
   form.method = 'post';
   form.submit();
  }
- function showDiskState(t){
-    var postVal = t.innerHTML;
+ function showDiskState(num){
+    var id = document.forms[num].id.value;
+//    var postVal = t.innerHTML;
 //    var zoneid = document.getElementById(postVal+'_zone').value;
     var xhr = new XMLHttpRequest();
     xhr.open('POST','volumeState.php');
     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    var data = 'displayname='+postVal;
+    var data = 'id='+id;
+  //  var data = 'displayname='+postVal;
   //  data = data + '&zoneid='+zoneid;
     xhr.send(data);
     xhr.onreadystatechange = function(){
@@ -80,12 +82,13 @@ for($i=0; $i<$num; $i++){
      $temp = $result;
   }?>
   <tr>
-  <td class='view' onclick="showDiskState(this)"><?= $temp['name'] ?></td>
+  <td class='view' onclick="showDiskState('<?=$i?>')"><?= $temp['name'] ?></td>
   <td>
   <?=$temp['zonename']?>
 
-  <form method='post'> 
-  <input id='<?=$temp['name']?>_zone' type='hidden' value='<?= $temp['zoneid']?>'/>
+  <form style="padding:0px; margin:0px" method='post'> 
+  <input type='hidden' value='<?= $temp['id']?>'/>
+  <input type='hidden' value='<?= $temp['zoneid']?>'/>
   <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
   <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>
   </form>
