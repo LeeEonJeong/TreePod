@@ -73,7 +73,7 @@ for($i=0; $i<$num; $i++){
   <td style="width:20%"><input type='button' class='button2' value='조회' onclick="portForwarding('<?=$i?>')"/></td>
   <td style="width:20%"><input type='button' class='button2' value='등록' onclick="addPortForwarding('<?=$i?>')"/></td>
   <?php
-    if($temp['issourcenat']=="true") {
+    if(gettype($temp['usageplantype'])!="string") {
       echo "<td><b>-</b></td>";
     } else {
     echo "<td><input type='submit' class='button' value='삭제'/></td>";

@@ -142,3 +142,9 @@ select {
   border-bottom: 1px solid #AAAAAA;
   width:45%;
 }
+
+.fifty_left {
+  width: 45%;
+  margin: 2%;
+  float: left;
+}
