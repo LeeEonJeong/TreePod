@@ -31,21 +31,17 @@ $cmdArr = array(
   "totalsize" => $_POST['totalsize'], // 고쳐야함!!
   "volumetype" => $_POST['volumetype'],
   "usageplantype" =>  $_POST['usageplantype'],
-  "networkid" => $_POST['networkid'],//"75852ff8-ab87-4652-8128-afd3b9bdbc58",
+//  "networkid" => $_POST['networkid'],//"75852ff8-ab87-4652-8128-afd3b9bdbc58",
   "apikey" => API_KEY
 );
-var_dump_enter($cmdArr);
+//var_dump_enter($cmdArr);
+
 //exit;
+
 $result = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
 set_time_limit(6000);
 var_dump_enter($result);
-exit;
-/*
-sleep(30);
-
-$jobId = $result["jobid"];
-echo $jobId;
-if(session_push('processID',$result['jobid'])==true)*/
+//exit;
 
   echo "<script>location.replace('listNas.php');</script>";
 

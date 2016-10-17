@@ -1,3 +1,6 @@
+<?php 
+include_once('api_constants.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,74 +8,54 @@
 <link rel="stylesheet" type="text/css" href="design.css">
 <link rel="stylesheet" type="text/css" href="menu_design.css">
 <link rel="stylesheet" type="text/css" href="alert_bar_design.css">
-<style>
-table,tr,td{
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-</style>
-<?php
-include_once('customAlert.html');
-include_once('api_constants.php');
-include_once('./callAPI.php');
-include_once('var_dump_enter.php');
-?>
 <script>
 function makeByteToGB(byte){
   byte = Number(byte);
-  document.write( byte/1024/1024/1024 +"GB" );
+  return (byte/1024/1024/1024).toFixed(2) + " GB";
 }
 
-function destroyVM(){
-//  alert(document.forms[num]);
-  var server = document.getElementById('server_state_form');
-  server.action = 'destroyVM.php';
-  server.method = 'post';
-  server.submit();
-}
-function startVM(){
+function resizeNASVolume(th){
+  var td = document.getElementById('totalsize');
+  var ori = td.innerHTML
+  ori = ori.replace(/[^0-9]/g,'');
+  ori = ori/100;
+  td.innerHTML="";
+//  alert(td.chlidNodes);
+  var form = document.createElement('form');
+  form.setAttribute('id','resize_form');
+  form.setAttribute('method','post');
+  form.setAttribute('action','test.php');
+  var input_total_size = document.createElement('input');
+  input_total_size.setAttribute('type','number');
+  input_total_size.setAttribute('class','transparent');
+  input_total_size.setAttribute('value',ori);
+  input_total_size.setAttribute('name','totalsize');
+  form.appendChild(input_total_size);
 
-  var server = document.getElementById('server_state_form');
-  server.action = 'startVM.php';
-  server.method = 'post';
-  server.submit();
+  var input_id = document.createElement('input');
+  input_id.setAttribute('type','hidden');
+  input_id.setAttribute('name','id');
+  input_id.setAttribute('value',document.getElementById('NAS_state_form').id.value);
+  form.appendChild(input_id);
+
+  td.appendChild(form);
+ // alert(th);
+  th.style.display='none';
+  document.getElementById('submit_resize').style.display='inline';
 }
-function stopVM(){
-  var server = document.getElementById('server_state_form');
-  server.action = 'stopVM.php';
-  server.method = 'post';
-  server.submit();
+
+function resizeSubmit(){
+	var form = document.getElementById('resize_form');
+	form.action='updateNAS.php';
+	form.method='post';
+  Alert.render('NAS','크기 변경 진행중....','');
+	form.submit();
 }
-function restartVM(){
-  var server = document.getElementById('server_state_form');
-  server.action = 'restartVM.php';
-  server.method = 'post';
-  server.submit();
-}
-function resetPassword(){
-  var server = document.getElementById('server_state_form');
-  server.action = 'resetPassword.php';
-  server.method = 'post';
-  server.submit(); 
-}
+
 function stateClose(){
-  document.getElementById('serverState').style.display="none";
+  document.getElementById('NASState').style.display="none";
 }
 
- function isVMdeleted(processStart,processEnd){
-
-     var findStr = "<?=VM_DESTROY?>";
-      for(i=processStart; i<=processEnd ; i++) {
-        var message = document.getElementById('state'+i).innerHTML;
-        if (message.indexOf(findStr) != -1) {
-          alert('서버 삭제가 완료 되었습니다.');
-          return true; //원래는 여기가 true;
-        }else {   
-         // alert('서버 삭제가 완료 되지 않음..');
-          return false; //원래는 여기가 flase;
-        }
-    }
-}
 
   function showNASState(t){
     var postVal = t.innerHTML;
@@ -83,38 +66,36 @@ function stateClose(){
     xhr.send(data);
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200) {
-          document.getElementById('NASState').innerHTML = xhr.responseText; 
-        //  alert(xhr.responseText);
+        	var temp_text = xhr.responseText;
+     //   	alert(temp_text);
+          document.getElementById('NASState').innerHTML = xhr.responseText;
+          var size_array = temp_text.split("<size>"); 
+        //  alert(size_array[1]);
+        	document.getElementById('usedsize').innerHTML = makeByteToGB(size_array[1]);
+        	document.getElementById('totalsize').innerHTML = makeByteToGB(size_array[3]);
+        //	alert(size_array.length);
+        	if(size_array.length != 5) {
+        		document.getElementById('autoresize').innerHTML = makeByteToGB(size_array[5]) + "/" + makeByteToGB(size_array[7]);
+        	}
         }
       }
     document.getElementById('NASState').style.display = 'table';
   }
 
 
-
-  function renewMyServer(){
-//    alert('renewMyServer');
-
-    if(isVMdeleted(span_start,span_end) == true){
-        span_start = 2;
-        span_end = 1;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET','renewMyServer.php');
-        xhr.send();
-        xhr.onreadystatechange = function(){
-        //  alert(xhr.responseText);
-          if(xhr.readyState === 4 && xhr.status === 200) {
-            document.querySelector('#myVM').innerHTML = xhr.responseText;
-          //  alert(xhr.responseText);
-          }
-        }
-       // xhr.send();
-        // alert("ajax use");
-        stateClose();
-     }
-
-  }
 </script>
+<style>
+table,tr,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+<?php
+include_once('customAlert.html');
+include_once('./callAPI.php');
+include_once('var_dump_enter.php');
+?>
+
 </head>
 <body>
 <?php
@@ -123,7 +104,7 @@ include_once('head2.php');
 <br/>
 <table  class="noline hoverOn">
 <tbody id="myVM" onmouseover='renewMyServer()'>
-<tr class="background_gray"><td>NAS 이름</td><td>타입</td><td>경로명</td><td>생성일자</td></tr>
+<tr class="background_gray"><td>NAS 이름</td><td>타입</td><td>지역</td><td>생성일자</td><td>-</td></tr>
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -132,6 +113,10 @@ $listProductcmdArr = array(
     "command" => "listVolumes",
     "status" => "online",
     "apikey" => API_KEY
+);
+$zoneCmdArr = array(
+	"command" => "listZones",
+	"apikey" => API_KEY
 );
 $result = callCommand($URL_NAS, $listProductcmdArr, SECERET_KEY);
 //var_dump_enter($result);
@@ -147,14 +132,20 @@ for($i=0; $i<$result_num; $i++){
   }else {
     $temp = $result;
   }
-  echo "<tr><td class='view' onmouseover = 'viewPassword(this)' onmouseout='hiddenPassword(this)' onclick='showNASState(this)'>";
+
+  if($temp['status']!='online') continue;
+  $zoneCmdArr['id'] = $temp['zoneid'];
+  $zoneResult = callCommand($URL, $zoneCmdArr, SECERET_KEY);
+//  var_dump_enter($zoneResult);
+  echo "<tr><td class='view' onclick='showNASState(this)'>";
   echo $temp['name'];
   echo "</td> <td>";
   echo $temp['volumetype'];
   echo "</td> <td>";
-  echo $temp['path'];
+  echo  $zoneResult['zone']['name'];
   echo "</td> <td>";
   echo $temp['created'];
+  echo "</td> <td><form method='post' action='deleteNAS.php'><input type='hidden' name='id' value='".$temp['id']."'/><input type='submit' class='button' value='삭제'/></form>";
   echo "</td> </tr>";
 
 }
@@ -163,7 +154,7 @@ for($i=0; $i<$result_num; $i++){
 </tbody>
 </table>
 
-<table style="display: none" class="gray_line_top_bottom" id="serverState">
+<table style="display: none" class="gray_line_top_bottom" id="NASState">
 <!--<tbody id="serverState">
 <tr  class="background_gray">
   <td style="text-align: left" colspan='2'>(서버이름)</td>

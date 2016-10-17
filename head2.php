@@ -1,5 +1,8 @@
 <?php 
-include_once('api_constants.php');?>
+include_once('api_constants.php');
+include_once('login_certify.php');
+?>
+
 
 <!--  <p>state : <span id="state"></span></p> -->
 <link rel="stylesheet" type="text/css" href="design.css">
@@ -37,8 +40,13 @@ include_once('api_constants.php');?>
   </ul>
 </li>
 
-
-<li><a href="sessionDestroy.php">Log Out</a></li> 
+<?php
+  if(isset($_SESSION['ID'])){
+    echo "<li><a href='sessionDestroy.php'>Log Out</a></li>";
+  } else {
+    echo "<li><a href='#'>Log In</a></li>"; 
+  }
+?>
 </ul>
 <br style="clear: left" />
 </div>

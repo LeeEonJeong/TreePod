@@ -29,11 +29,11 @@ if(count($result)!=0){
  <tr class="background_gray"><td style="text-align: left" colspan="4"><b><?=$_POST['ipaddress']?></b></td>
  <td style="text-align: right"><div onclick="stateClose()">X</div></td></tr>
  <tr  class="background_gray">
-    <td>서버</td>
-    <td>프로토콜</td>
-    <td>외부번호</td>
-    <td>내부번호</td>
-    <td>-</td>
+    <td style="width: 20%">서버</td>
+    <td style="width: 20%">프로토콜</td>
+    <td style="width: 20%">외부번호</td>
+    <td style="width: 20%">내부번호</td>
+    <td style="width: 20%">-</td>
 </tr>
  <?php
  for($i=0; $i<$num; $i++){

@@ -48,6 +48,7 @@ $cmdArr = array(
 //exit;
 $result = callCommand($URL, $cmdArr, SECERET_KEY);
 $result = $result['account'];
+//var_dump_enter($result);
 
 $cmdArr = array(
   "command" => "listVolumes",
@@ -64,12 +65,13 @@ $result2 = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
 </tr>
 
 <tr>
-<td>Disk 갯수</td> <td><?=$result['volumetotal']?></td>
+<td>공인 IP 갯수</td> <td><?=$result['iptotal']?></td>
 </tr>
 
 <tr>
-<td>공인 IP 갯수</td> <td><?=$result['networktotal']?></td>
+<td>Disk 갯수</td> <td><?=$result['volumetotal']?></td>
 </tr>
+
 </table>
 
 <table class="fifty_left gray_line">
