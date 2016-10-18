@@ -21,15 +21,7 @@ include_once('./callAPI.php');
 include_once('var_dump_enter.php');
  $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 
-/*
-$listProductcmdArr = array(
-  "command" => "listZones",
-  "available" => "true",
-  "apikey" => API_KEY
-); 
 
-$result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
-*/
  ?>
 
 

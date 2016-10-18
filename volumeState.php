@@ -54,7 +54,7 @@ for($i=0; $i<$result_num; $i++){
 
   <td style='width: 20%;'><b>연결 VM</b> </td>
   <td style='width: 35%'> 
-  <?=$temp['vmname']?> : <?=$temp['vmstate']?> 
+  <?=$temp['vmdisplayname']?> : <?=$temp['vmstate']?> 
   </td>
   <td style='width: 20%'> 
     <form style="margin:0px;padding:0px;" method="post" action="volumeDetach.php">
@@ -62,8 +62,12 @@ for($i=0; $i<$result_num; $i++){
 <?php
       if(isset($temp['diskofferingname'])==false){
         echo "-";
-      } else{
-        echo "<input type='submit' class='button2' value='연결끊기'/>";
+      } else {
+        if($temp['vmstate']!="Stopped") {
+          echo "-";
+        } else {
+          echo "<input type='submit' class='button2' value='연결끊기'/>";
+        }
       }  
 ?>
       

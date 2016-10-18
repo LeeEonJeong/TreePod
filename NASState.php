@@ -49,7 +49,6 @@ for($i=0; $i<$result_num; $i++){
   <td style="width:15%"><b>file total</b></td>
   <td style="width:15%"><b>autosize</b></td>
 </tr>
-</tr>
 <tr>
   <td><?=$temp['usageplantype']?></td>
   <td><?=$temp['ip']?>:/<?=$temp['path']?></td>

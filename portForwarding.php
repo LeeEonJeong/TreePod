@@ -24,10 +24,10 @@ include_once('var_dump_enter.php');
  );
 
  if($_POST['publicendport'] != "") {
- 	$cmdArr['publicendport'] = $_POST['publicendport'];
+ 	$cmdArr['publicendport'] = $_POST['publicport'];
  }
  if($_POST['privateendport'] != "" ) {
- 	$cmdArr['privateendport'] = $_POST['privateendport'];
+ 	$cmdArr['privateendport'] = $_POST['privateport'];
  }
  var_dump_enter($cmdArr);
 

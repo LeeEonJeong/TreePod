@@ -34,11 +34,11 @@ include_once('api_constants.php');
 				Alert.render('로그인','비밀 번호를 입력해주세요.','default');
 				return false;
 			}
-			if(login.id.value != "<?=ID?>"){
+			if(login.id.value != "<?php echo ID; ?>"){
 				Alert.render('로그인','존재하지 않는 아이디 입니다.','default');
 				return false;
 			}
-			if(login.pw.value != "<?=PW?>"){
+			if(login.pw.value != "<?php echo PW; ?>"){
 				Alert.render('로그인','비밀번호가 잘못되었습니다.','default');
 				return false;
 			}

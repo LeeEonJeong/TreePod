@@ -56,7 +56,22 @@ function stateClose(){
   document.getElementById('NASState').style.display="none";
 }
 
+function NASAttachSubmit(){
+  var form = document.getElementById('NAS_connect_form');
+  form.action='NASAttach.php';
+  form.method='post';
+  Alert.render('NAS','서버 연결 진행중...','');
+  form.submit();
+}
 
+function NASDettachSubmit(){
+  var form = document.getElementById('NAS_connect_form');
+  form.action='NASDettach.php';
+//  form.action='test.php';
+  form.method='post';
+  Alert.render('NAS','서버 연결 진행중...','');
+  form.submit();
+}
   function showNASState(t){
     var postVal = t.innerHTML;
     var xhr = new XMLHttpRequest();
@@ -82,6 +97,22 @@ function stateClose(){
     document.getElementById('NASState').style.display = 'table';
   }
 
+function showNasConnect(num){
+    var postVal = document.forms[num].id.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','NASConnectState.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'id='+postVal;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+          var temp_text = xhr.responseText;
+     //     alert(temp_text);
+          document.getElementById('NASState').innerHTML = xhr.responseText;
+        }
+      }
+    document.getElementById('NASState').style.display = 'table';
+}
 
 </script>
 <style>
@@ -103,8 +134,8 @@ include_once('head2.php');
 ?>
 <br/>
 <table  class="noline hoverOn">
-<tbody id="myVM" onmouseover='renewMyServer()'>
-<tr class="background_gray"><td>NAS 이름</td><td>타입</td><td>지역</td><td>생성일자</td><td>-</td></tr>
+<tbody id="myVM"><!-- onmouseover='renewMyServer()'>-->
+<tr class="background_gray"><td>NAS 이름</td><td>타입</td><td>지역</td><td>생성일자</td><td>내 서버 연결 </td><td>-</td></tr>
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -145,6 +176,8 @@ for($i=0; $i<$result_num; $i++){
   echo  $zoneResult['zone']['name'];
   echo "</td> <td>";
   echo $temp['created'];
+  echo "</td><td>";
+  echo "<input type='button' class='button2' value='조회하기' onclick=\"showNasConnect('".$i."')\"/>";
   echo "</td> <td><form method='post' action='deleteNAS.php'><input type='hidden' name='id' value='".$temp['id']."'/><input type='submit' class='button' value='삭제'/></form>";
   echo "</td> </tr>";
 

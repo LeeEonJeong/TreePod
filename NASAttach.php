@@ -15,28 +15,27 @@ include_once('./callAPI.php');
 include_once('var_dump_enter.php');
 include_once('sessionPush.php');
 //var_dump_enter($_POST);
-
+//exit;
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
+//$URL_NAS = "https://api.ucloudbiz.olleh.com/nas/v1/client/api?";
 $cmdArr = array(
-  "command" => "createVolume",
-  "zoneid" => $_POST['zoneid'],
-  "diskofferingid" => $_POST['diskofferingid'],
-  "name" => $_POST['name'],
-  "usageplantype" =>  $_POST['usageplantype'],
+  "command" => "addNicToVirtualMachine",
+  "networkid" => $_POST['networkid'],
+  "virtualmachineid" => $_POST['virtualmachineid'],
   "apikey" => API_KEY
 );
-var_dump_enter($cmdArr);
-//exit;
-$result = callCommand($URL, $cmdArr, SECERET_KEY);
-set_time_limit(600);
-/*
-sleep(30);
-*/
-$jobId = $result["jobid"];
-echo $jobId;
-if(session_push('processID',$result['jobid'])==true)
-  echo "<script>location.replace('listVolume.php');</script>";
+//var_dump_enter($cmdArr);
 
+//exit;
+
+$result = callCommand($URL, $cmdArr, SECERET_KEY);
+set_time_limit(6000);
+//var_dump_enter($result);
+//exit;
+//비동기 명령어니까 고쳐라.
+  echo "<script>location.replace('listNas.php');</script>";
+
+?>
 <script src="asy.js">
 </script>
 <?php

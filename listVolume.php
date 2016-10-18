@@ -18,7 +18,7 @@ function makeByteToGB(byte){
   form.submit();
  }
  function showDiskState(num){
-    var id = document.forms[num].id.value;
+    var id = document.forms[num].ipaddressid.value;
 //    var postVal = t.innerHTML;
 //    var zoneid = document.getElementById(postVal+'_zone').value;
     var xhr = new XMLHttpRequest();
@@ -87,7 +87,6 @@ for($i=0; $i<$num; $i++){
   <?=$temp['zonename']?>
 
   <form style="padding:0px; margin:0px" method='post'> 
-  <input type='hidden' value='<?= $temp['id']?>'/>
   <input type='hidden' value='<?= $temp['zoneid']?>'/>
   <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
   <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>

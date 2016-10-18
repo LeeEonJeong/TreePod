@@ -57,7 +57,7 @@ function stateClose(){
 
  function isVMdeleted(processStart,processEnd){
 
-     var findStr = "<?=VM_DESTROY?>";
+     var findStr = "<?php echo VM_DESTROY; ?>";
       for(i=processStart; i<=processEnd ; i++) {
         var message = document.getElementById('state'+i).innerHTML;
         if (message.indexOf(findStr) != -1) {
