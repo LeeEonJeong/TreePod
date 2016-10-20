@@ -129,7 +129,11 @@ if(isset($temp['diskofferingname'])==false){
   echo "<input type='button' class='button' value='삭제 불가능'/> ";
 }
 else if(strstr($temp['diskofferingname'],'additional')==true) {
-  echo "<input type='submit' class='button' value='삭제하기'/> ";
+  if(!isset($temp['vmstate']) ){
+    echo "<input type='submit' class='button' value='삭제하기'/> ";
+  } else {
+    echo "<input type='button' class='button' value='VM 연결 해지를 해주세요.'/>";
+  }
 } else { echo "<input type='button' class='button' value='삭제 불가능'/> "; }
 ?>
 </form>

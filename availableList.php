@@ -28,13 +28,15 @@ function isEnglihOrNum(str){
 
 function checkDisplayName() {
     var dis = document.getElementById('sendform').displayname.value;
-    if(dis==""){ 
-        alert("서버 이름을 입력해 주세요."); 
+    if(dis==""){
+        Alert.render('서버 명','이름을 입력해 주세요.','default'); 
+    //    alert("서버 이름을 입력해 주세요."); 
         document.getElementById('sendform').displayname.focus();
         return false;
     }
     else if(isEnglihOrNum(dis)==false){
-        alert("영문및 숫자만 사용 가능 합니다."); 
+        Alert.render('서버 명','영문 및 숫자만 사용 가능 합니다.','default');
+    //    alert("영문및 숫자만 사용 가능 합니다."); 
         document.getElementById('sendform').displayname.focus();
         return false;
     }
@@ -46,8 +48,8 @@ function submitForm(){
     var form = document.getElementById('sendform');
   //  alert(form.displayname.value);
     if(form.displayname.readOnly != true){
-
-        alert("서버 명 중복 체크를 해주세요.");
+        Alert.render('서버 명','서버 명 중복 체크를 해주세요.','default');
+//        alert("서버 명 중복 체크를 해주세요.");
         return false;
     }
 

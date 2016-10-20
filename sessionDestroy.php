@@ -5,7 +5,7 @@ include('customAlert.html');
 	foreach($_COOKIE as $key=>$val){ 
 	 setCookie($key,"",time()-1800); 
 // $temp = $_COOKIE[$key];
- 	echo $key;
+// 	echo $key;
  //	echo "<script>alert(getCookie('".$key."'));</script>";
 }
 ?>
@@ -14,7 +14,11 @@ include('customAlert.html');
 
 <script>
 //if(Alert.render('Logout','로그아웃 하셨습니다.')==true){
-	alert("Log out!");
-	location.replace('index.php');
+	
+var loca = function(){
+	location.replace('login_notice.php');
+}
+	Confirm.render('LOG OUT','정상적으로 로그아웃 하셨습니다.',loca,'','no');
+//	alert("Log out!");
 //}
 </script>

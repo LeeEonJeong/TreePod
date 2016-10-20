@@ -27,7 +27,7 @@ include('var_dump_enter.php');
     }
     if($temp['zoneid'] == $_POST['zoneid']) {
       array_push($type,$result['name']);
-      array_push($type,$result['nic']['id']);
+      array_push($type,$result['id']);
     }
   }
   for($i = 0; $i < count($type); $i++){

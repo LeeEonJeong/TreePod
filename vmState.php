@@ -30,6 +30,22 @@ for($i=0; $i<$result_num; $i++){
     break;
   }
 }
+
+$vm_nic;
+$vm_nic_num = 0;
+if(isset($temp['nic']['id'])){
+  $vm_nic = $temp['nic'];
+}else {
+  $vm_nic_num = count($temp['nic']);
+  $vm_nic = $temp['nic'];
+} 
+
+for($i=0; $i<$vm_nic_num; $i++){
+  if($vm_nic[$i]['isdefault']=="true"){
+    $vm_nic = $vm_nic[$i];
+    break;
+  }
+}
 ?>
 
 <tr class="background_gray">
@@ -37,7 +53,7 @@ for($i=0; $i<$result_num; $i++){
   <td style="text-align: right"><div id="serverStateClose" onclick="stateClose()">X </div></td>
 </tr>
 <tr>
-  <td><b>네트워크 정보</b></td><td>사설 IP<br><?= $temp['nic']['ipaddress']?></td><td>gate way<br><?= $temp['nic']['gateway']?></td>
+  <td><b>네트워크 정보</b></td><td>사설 IP<br><?= $vm_nic['ipaddress']?></td><td>gate way<br><?= $vm_nic['gateway']?></td>
 </tr>
 <tr>
   <td style='width: 20%;'><b>실행상태</b> </td><td style='width: 40%'><?= $temp['state']?></td>

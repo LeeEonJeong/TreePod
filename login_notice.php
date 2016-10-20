@@ -1,6 +1,4 @@
-<?php
-include_once('api_constants.php');
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,19 +25,11 @@ include_once('api_constants.php');
 			var login=document.getElementById('login_form');
 		//	alert(login.id.value);
 			if(login.id.value==""){
-				Alert.render('로그인','아이디를 입력해주세요.','default');
+				Alert.render('Log In','아이디를 입력해주세요.','default');
 				return false;
 			}
 			if(login.pw.value==""){
-				Alert.render('로그인','비밀 번호를 입력해주세요.','default');
-				return false;
-			}
-			if(login.id.value != "<?php echo ID; ?>"){
-				Alert.render('로그인','존재하지 않는 아이디 입니다.','default');
-				return false;
-			}
-			if(login.pw.value != "<?php echo PW; ?>"){
-				Alert.render('로그인','비밀번호가 잘못되었습니다.','default');
+				Alert.render('Log In','비밀 번호를 입력해주세요.','default');
 				return false;
 			}
 			login.action='login_submit.php';

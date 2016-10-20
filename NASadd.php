@@ -13,7 +13,7 @@
 include_once('api_constants.php');
 include_once('./callAPI.php');
 include_once('var_dump_enter.php');
-include_once('sessionPush.php');
+include_once('customAlert.html');
 //var_dump_enter($_POST);
 
 //$URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
@@ -28,10 +28,9 @@ $cmdArr = array(
   "name" => $_POST['name'],
   "path" => $_POST['path'],
   "zoneid" => $_POST['zoneid'],
-  "totalsize" => $_POST['totalsize'], // 고쳐야함!!
+  "totalsize" => $_POST['totalsize'], 
   "volumetype" => $_POST['volumetype'],
   "usageplantype" =>  $_POST['usageplantype'],
-//  "networkid" => $_POST['networkid'],//"75852ff8-ab87-4652-8128-afd3b9bdbc58",
   "apikey" => API_KEY
 );
 //var_dump_enter($cmdArr);
@@ -40,17 +39,21 @@ $cmdArr = array(
 
 $result = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
 set_time_limit(6000);
-var_dump_enter($result);
+//var_dump_enter($result);
 //exit;
 
-  echo "<script>location.replace('listNas.php');</script>";
+  //echo "<script>location.replace('listNas.php');</script>";
 
 ?>
-<script src="asy.js">
+<form id='attach_form' action='NASAttach.php' method='post'>
+  <input type='hidden' name='virtualmachineid' value='<?=$_POST['virtualmachineid']?>'/>
+  <input type='hidden' name='networkid' value='<?=$result['response']['networkid']?>'/>
+</form>
+<script>
+Alert.render('NAS 서버 연결','서버와의 연결을 진행중 입니다.<br> 잠시만 기다려 주십시요....','');
+document.getElementById('attach_form').submit();
 </script>
-<?php
-    
-?>
+
 
 </body>
 </html>

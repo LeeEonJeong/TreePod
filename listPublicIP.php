@@ -54,7 +54,7 @@ for($i=0; $i<$num; $i++){
      $temp = $result;
   }?>
   <tr>
-  <form action='PublicIPDelete.php' method='post'>
+  <form action='publicIPDelete.php' method='post'>
   <td style="width:25%" ><?= $temp['ipaddress'] ?>
   <input name='ipaddressid' type='hidden' value='<?= $temp['id']?>'/>
   <input name='ipaddress' type='hidden' value='<?= $temp['ipaddress']?>'/>
@@ -67,6 +67,7 @@ for($i=0; $i<$num; $i++){
   <?php
     if(gettype($temp['usageplantype'])!="string") {
       echo "<td><b>-</b></td>";
+    //  var_dump($temp['usageplantype']); 
     } else {
     echo "<td><input type='submit' class='button' value='삭제'/></td>";
     }

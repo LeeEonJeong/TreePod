@@ -67,7 +67,7 @@ function callCommand($URL, $cmdArr, $SECRET)
     //    var_dump_enter($str);
         if($str == FALSE) {
         //    var_dump_enter($str);
-            echo "<br/>ERROR in API<br/>";
+        //    echo "<br/>ERROR in API<br/>"; // 디버깅 할때만 보이게 할것.
             return array("jobid"=>"ERROR");
         }
     //  echo "<pre>".htmlentities($str)."</pre>";

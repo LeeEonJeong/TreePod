@@ -35,7 +35,7 @@ $result = callCommand($URL, $listProductcmdArr, SECERET_KEY);
 <tbody>
 
 <!--<form action="test.php" method="post"> -->
-<form action="PublicIPAdd.php" method="post">
+<form action="publicIPAdd.php" method="post">
 <tr id="newIP"  >
 <!--  <td style="width:33%">지역</td>
   <td style="width:33%">요금 약정 방법</td>

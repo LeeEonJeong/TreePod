@@ -55,7 +55,7 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 </tr>
 <tr>
     <td class="tweenty_width">위치</td>
-    <td colspan="2"><select name="zoneid" id="zoneid" onchange="display('zoneid','networkid')">
+    <td colspan="2"><select name="zoneid" id="zoneid" onchange="display('zoneid','virtualmachineid')">
     <option value="">-</option>
 <?php
     for($i=0; $i<(int)$result['count']; $i++){
@@ -66,7 +66,7 @@ $result = callCommand($URL, $listProductcmdArr, $seceret_key);
 </tr>
 <tr>
     <td class="tweenty_width">연결 서버 선택</td>
-    <td colspan="2"><select name="networkid" id="networkid">
+    <td colspan="2"><select name="virtualmachineid" id="virtualmachineid">
     <option value="">-</option>
 
     </select></td>

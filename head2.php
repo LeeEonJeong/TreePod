@@ -60,9 +60,6 @@ include_once('login_certify.php');
   <script src="asy.js">
   </script>
   <script>
-    function test2(asd){
-      alert(document.getElementById('state'+asd).value);
-    }  
 
     var span_start=2;
     var span_end=1;

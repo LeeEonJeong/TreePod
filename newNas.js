@@ -1,3 +1,4 @@
+
 function deleteOption(type){
     var select_option = document.getElementById(type);
  //   alert(select_option);
@@ -5,6 +6,7 @@ function deleteOption(type){
         select_option.remove(select_option.length-1);
     }
 }
+
 function display(my_id,type) {
     var send_form = document.getElementById('sendform');
     var my_val = document.getElementById(my_id).value;
@@ -48,6 +50,7 @@ function isEnglihOrNum(str){
     }
     return true; 
 }
+
 function checkDisplayName() {
     var dis = document.getElementById('sendform').name.value;
     if(dis==""){ 
@@ -64,6 +67,7 @@ function checkDisplayName() {
         window.open("NasNameCheck.php?disk_name="+dis,'','left=300, top=300, width=400, height=300, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, copyhistory=no, resizable=no');
     }
 }
+
 function checkPathName() {
     var dis = document.getElementById('sendform').path.value;
     if(dis==""){ 
@@ -80,6 +84,7 @@ function checkPathName() {
         window.open("pathNameCheck.php?disk_path="+dis,'','left=300, top=300, width=400, height=300, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, copyhistory=no, resizable=no');
     }
 }
+
 function submitForm(){
     var form = document.getElementById('sendform');
     if(form.name.value=="") {
@@ -100,6 +105,7 @@ function submitForm(){
     }
 
     form.method="post";
+//    form.action='test.php';
     form.action="NASadd.php";
     form.submit();
     Alert.render('NAS 신청','화면이 바뀔 때 까지<br>잠시만 기다려 주십시요.... ','');

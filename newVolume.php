@@ -21,7 +21,8 @@ function isEnglihOrNum(){
     }    
 
     if (err > 0) { 
-        alert('영어와 숫자만 입력해 주세요.');
+    //    Alert.render('DISK 명','영어와 숫자만 입력해 주세요. ','default');
+    //    alert('영어와 숫자만 입력해 주세요.');
         form.name.value = "";
         form.name.focus();
         return false;
@@ -32,12 +33,13 @@ function isEnglihOrNum(){
 function submitForm(){
     var form = document.getElementById('sendform');
     if(form.name.value=="") {
-        alert('Disk 이름을 입력해 주세요.');
+        Alert.render('DISK 명','이름을 입력해 주세요. ','default');
+//        alert('Disk 이름을 입력해 주세요.');
         return false;
     }
     if( isEnglihOrNum() == false){
-
-        alert('영어와 숫자만 입력해 주세요.');
+        Alert.render('DISK 명','영어와 숫자만 입력해 주세요. ','default');
+//        alert('영어와 숫자만 입력해 주세요.');
         return false;
     }
 

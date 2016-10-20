@@ -49,7 +49,8 @@
   function addPorForwardingRules(){
 
     if(document.getElementById('virtualmachineid').value == "") {
-      alert("서버를 선택해 주세요.");
+      Alert.render('Port Forwarding','서버를 선택해 주세요. ','default');
+     // alert("서버를 선택해 주세요.");
       return false;
     }
     var privatePort = document.getElementById('privateport').value;

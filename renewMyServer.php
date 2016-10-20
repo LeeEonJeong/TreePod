@@ -14,12 +14,14 @@ include_once('var_dump_enter.php');
 </head>
 <body>
 
-<tr><td colspan="5"><b>- 서버 삭제완료! -</b></td></tr>
+<?php
+// <tr><td colspan="5"><b>- 서버 삭제완료! -</b></td></tr> 
+?>
 <tr class="background_gray"><td>서버 명</td><td>지역</td><td>Core X RAM</td><td>OS</td><td>생성 일자</td></tr>
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
-sleep(2);
+sleep(1);
 $listProductcmdArr = array(
     "command" => "listVirtualMachines",
     "apikey" => API_KEY
