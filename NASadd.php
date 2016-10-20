@@ -3,10 +3,14 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-
-<link rel="stylesheet" type="text/css" href="design.css">
-<link rel="stylesheet" type="text/css" href="menu_design.css">
-<link rel="stylesheet" type="text/css" href="alert_bar_design.css">
+<script>
+    var loca = function(){
+      location.replace('listNAS.php');
+    }
+    var err_info = function(){
+      history.back();
+    }
+</script>
 </head>
 <body>
 <?php
@@ -40,20 +44,32 @@ $cmdArr = array(
 $result = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
 set_time_limit(6000);
 //var_dump_enter($result);
-//exit;
 
+if($result['status']=='error') {
+  echo "<script>Confirm.render('NAS','".$result['errortext']."',err_info,'','no')</script>";
+  exit;
   //echo "<script>location.replace('listNas.php');</script>";
+}
 
 ?>
 <form id='attach_form' action='NASAttach.php' method='post'>
   <input type='hidden' name='virtualmachineid' value='<?=$_POST['virtualmachineid']?>'/>
   <input type='hidden' name='networkid' value='<?=$result['response']['networkid']?>'/>
 </form>
+<?php 
+  if($_POST['virtualmachineid'] != ""){
+?>
 <script>
 Alert.render('NAS 서버 연결','서버와의 연결을 진행중 입니다.<br> 잠시만 기다려 주십시요....','');
 document.getElementById('attach_form').submit();
 </script>
-
-
+<?php 
+  } else { ?>
+  <script>
+    Confirm.render('NAS','NAS생성이 완료 되었습니다.<br>서버 연결은 따로 신청해 주십시요.',loca,'','no');
+    </script>
+ <?php 
+  }
+ ?>
 </body>
 </html>

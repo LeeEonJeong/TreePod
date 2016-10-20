@@ -24,55 +24,52 @@ include_once('head2.php');
 <br/>
 <table  class="noline hoverOn">
 <tbody id="myVM"><!-- onmouseover='renewMyServer()'>-->
-<tr class="background_gray"><td>NAS 이름</td><td>타입</td><td>지역</td><td>생성일자</td><td>내 서버 연결 </td><td>-</td></tr>
+<tr class="background_gray">
+  <td style='width: 25%'>CIP</td>
+  <td style='width: 20%'>연결 NAS</td>
+  <td style='width: 30%'>연결 VM</td>
+  <td style='width: 25%'>zone</td>
+</tr>
 <?php
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 $URL_NAS ="https://api.ucloudbiz.olleh.com/nas/v1/client/api?";
-$listProductcmdArr = array(
-    "command" => "listVolumes",
-    "status" => "online",
-    "apikey" => API_KEY
-);
-$zoneCmdArr = array(
-	"command" => "listZones",
-	"apikey" => API_KEY
-);
-$result = callCommand($URL_NAS, $listProductcmdArr, SECERET_KEY);
+$listNetworks = array (
+  "command" => "listNetworks",
+  "apikey" => API_KEY
+  );
+
+$result =callCommand($URL, $listNetworks, SECERET_KEY);
 //var_dump_enter($result);
-
 $result_num = $result['count'];
-if($result_num != 0)
-	$result = $result['response'];
-//var_dump_enter($result['1']);
-
-for($i=0; $i<$result_num; $i++){
-  if($result_num != '1' ) {
-    $temp = $result[$i];
+$result = $result['network'];
+$NASCIP='';
+for($i=0; $i<$result_num; $i++) {
+  if($result_num==1){
+    $NASCIP = $result;
   }else {
-    $temp = $result;
+    $NASCIP = $result[$i];
   }
+  if(strstr($NASCIP['name'],'NAS') == false){
+    continue;
+  }?>
+  <tr>
+  <td>
+  <?=$NASCIP['displaytext'];?>
+  
+  </td>
+  <td><button class='button2' onclick="showNASList('<?=$NASCIP['id']?>')">조회하기</button></td>
+  <td style='width: 30%'><button class='button2' onclick=''>조회하기</button> <button class='button2' onclick=''>등록하기</button></td>
+  <td><?=$NASCIP['zonename'];?></td>
+  </tr>
+  <?php
+} ?>
 
-  if($temp['status']!='online') continue;
-  $zoneCmdArr['id'] = $temp['zoneid'];
-  $zoneResult = callCommand($URL, $zoneCmdArr, SECERET_KEY);
-//  var_dump_enter($zoneResult);
-  echo "<tr><td class='view' onclick='showNASState(this)'>";
-  echo $temp['name'];
-  echo "</td> <td>";
-  echo $temp['volumetype'];
-  echo "</td> <td>";
-  echo  $zoneResult['zone']['name'];
-  echo "</td> <td>";
-  echo $temp['created'];
-  echo "</td><td>";
-  echo "<input type='button' class='button2' value='조회하기' onclick=\"showNasConnect('".$i."')\"/>";
-  echo "</td> <td><form method='post' action='deleteNAS.php'><input type='hidden' name='id' value='".$temp['id']."'/><input type='submit' class='button' value='삭제'/></form>";
-  echo "</td> </tr>";
+</tbody>
+</table>
 
-}
-
-?>
+<table class="gray_line_top_bottom hoverOn">
+<tbody style='display:none' id="NASList"> <!--NAS 상태를 조회하는 부분.-->
 </tbody>
 </table>
 

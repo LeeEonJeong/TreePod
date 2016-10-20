@@ -44,7 +44,9 @@ function resizeSubmit(){
 function stateClose(){
   document.getElementById('NASState').style.display="none";
 }
-
+function listClose(){
+  document.getElementById('NASList').style.display="none";
+}
 function NASAttachSubmit(){
   var form = document.getElementById('NAS_connect_form');
   form.action='NASAttach.php';
@@ -61,30 +63,49 @@ function NASDettachSubmit(){
   Alert.render('NAS','서버 연결 끊기 진행중...','');
   form.submit();
 }
-  function showNASState(t){
-    var postVal = t.innerHTML;
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST','NASState.php');
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    var data = 'name='+postVal;
-    xhr.send(data);
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200) {
-        	var temp_text = xhr.responseText;
-     //   	alert(temp_text);
-          document.getElementById('NASState').innerHTML = xhr.responseText;
-          var size_array = temp_text.split("<size>"); 
+
+function showNASState(t){
+  var postVal = t.innerHTML;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST','NASState.php');
+  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  var data = 'name='+postVal;
+  xhr.send(data);
+  xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4 && xhr.status === 200) {
+      	var temp_text = xhr.responseText;
+   //   	alert(temp_text);
+        document.getElementById('NASState').innerHTML = xhr.responseText;
+        var size_array = temp_text.split("<size>"); 
         //  alert(size_array[1]);
-        	document.getElementById('usedsize').innerHTML = makeByteToGB(size_array[1]);
-        	document.getElementById('totalsize').innerHTML = makeByteToGB(size_array[3]);
+      	document.getElementById('usedsize').innerHTML = makeByteToGB(size_array[1]);
+      	document.getElementById('totalsize').innerHTML = makeByteToGB(size_array[3]);
         //	alert(size_array.length);
-        	if(size_array.length != 5) {
-        		document.getElementById('autoresize').innerHTML = makeByteToGB(size_array[5]) + "/" + makeByteToGB(size_array[7]);
-        	}
+      	if(size_array.length != 5) {
+      		document.getElementById('autoresize').innerHTML = makeByteToGB(size_array[5]) + "/" + makeByteToGB(size_array[7]);    
         }
       }
-    document.getElementById('NASState').style.display = 'table';
   }
+  document.getElementById('NASState').style.display = 'table';
+}
+
+function showNASList(t){
+  stateClose();
+  var postVal = t;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST','NASList.php');
+  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  var data = 'networkid='+postVal;
+  xhr.send(data);
+  xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        var temp_text = xhr.responseText;
+        document.getElementById('NASList').innerHTML = temp_text;
+      }
+  }
+  document.getElementById('NASList').style.display = 'table-row-group';
+
+}
 
 function showNasConnect(num){
     var postVal = document.forms[num].id.value;

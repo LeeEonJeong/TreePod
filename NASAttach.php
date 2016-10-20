@@ -42,7 +42,7 @@ set_time_limit(6000);
 if(session_push('processID',$result['jobid'])){
 	echo "<script>Confirm.render('NAS','서버 연결 신청이 완료 되었습니다',loca,'','no')</script>";
 } else {
-	echo "<script>Confirm.render('NAS','오류가 발생했습니다!',err_info,'','no')</script>";
+	echo "<script>Confirm.render('NAS','오류가 발생했습니다!<br>NAS 타입과 Server타입이 맞는지 확인 해주세요.',err_info,'','no')</script>";
 }
 
 ?>

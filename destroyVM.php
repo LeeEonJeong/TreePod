@@ -5,7 +5,7 @@
 
 <script>
 	var loca = function(){
-		location.replace('listFireWallRules.php');
+		location.replace('myServer.php');
 	}
 	var err_info = function(){
 		history.back();

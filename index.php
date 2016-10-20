@@ -7,28 +7,6 @@
 
 </style>
 
-<script>
-
-function destroyVM(num){
-//  alert(document.forms[num]);
-  document.forms[num].action = 'destroyVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
-}
-function startVM(num){
-//  alert(document.forms[num]);
-  document.forms[num].action = 'startVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
-}
-function stopVM(num){
-//  alert(document.forms[num]);
-  document.forms[num].action = 'stopVM.php';
-  document.forms[num].method = 'post';
-  document.forms[num].submit();
-}
-
-</script>
 </head>
 <body>
 <?php
@@ -44,6 +22,7 @@ $cmdArr = array(
   "command" => "listAccounts",
   "apikey" => API_KEY
 );
+
 //var_dump_enter($cmdArr);
 //exit;
 $result = callCommand($URL, $cmdArr, SECERET_KEY);
@@ -55,6 +34,18 @@ $cmdArr = array(
   "apikey" => API_KEY
 );
 $result2 = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
+$result2_num = $result2['count'];
+$online_num = 0;
+$result2 = $result2['response'];
+for($i=0; $i<$result2_num; $i++){
+  if($result2_num == 1){
+    $temp2 = $result2;
+  } else {
+    $temp2 = $result2[$i];
+  }
+  if($temp2['status']=='online')
+    $online_num++;
+}
 //$result2 = $result2[]
 //var_dump_enter($result2);
 ?>
@@ -77,7 +68,7 @@ $result2 = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
 <table class="fifty_left gray_line">
 <tr class="background_gray"><td colspan="2"><b>NAS</b></td></tr>
 <tr>
-<td style="width:50%">NAS 갯수</td> <td style="width:50%"><?=$result['vmtotal']?></td>
+<td style="width:50%">NAS 갯수</td> <td style="width:50%"><?=$online_num?></td>
 </tr>
 
 </tr>

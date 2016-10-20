@@ -145,9 +145,15 @@ select {
 }
 
 .fifty_left {
-  width: 45%;
-  margin: 2%;
+  width: 44%;
+  margin: 3%;
   float: left;
+}
+
+.ninty_left{
+  width: 90%;
+  border-bottom: 1px solid #AAAAAA;
+  margin: auto;
 }
 
 .login_container{

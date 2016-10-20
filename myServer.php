@@ -61,7 +61,7 @@ function stateClose(){
       for(i=processStart; i<=processEnd ; i++) {
         var message = document.getElementById('state'+i).innerHTML;
         if (message.indexOf(findStr) != -1) {
-          alert('서버 삭제가 완료 되었습니다.');
+        //  alert('서버 삭제가 완료 되었습니다.');
           return true; //원래는 여기가 true;
         }else {   
          // alert('서버 삭제가 완료 되지 않음..');

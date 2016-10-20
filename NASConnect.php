@@ -25,7 +25,7 @@ $listProductcmdArr = array(
     "apikey" => API_KEY
 );
 $result = callCommand($URL_NAS, $listProductcmdArr, SECERET_KEY);
-var_dump_enter($result);
+//var_dump_enter($result);
 
 //var_dump_enter($_POST);
 $result_num = $result['count'];
@@ -56,8 +56,7 @@ for($i=0; $i < $vm_count; $i++) {
       $vm_connected = $zoneResult[$i];
     }
     $isNasConnectedValue = isNasConnected($temp,$vm_connected['nic']);
-  //  var_dump_enter($isNasConnectedValue);
-    if($isNasConnectedValue != false){ 
+    if($isNasConnectedValue!=false){ 
     //  break; ?>
     <tr>
       <td style="width:25%"><b>연결 VM</b></td>
@@ -70,7 +69,6 @@ for($i=0; $i < $vm_count; $i++) {
       <td style="width:25%"><input type='button' class='button' value='연결끊기' onclick='NASDettachSubmit()'/></td>
     </tr>
     <?php
-      
       //여기서... 
     } 
  }

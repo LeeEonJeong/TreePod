@@ -40,8 +40,9 @@ if ($_POST['diskofferingid'] != "rootonly"){
 }
 //var_dump_enter($cmdArr);
 //exit;
+set_time_limit(60000);
+
 $result = callCommand($URL, $cmdArr, SECERET_KEY);
-set_time_limit(6000);
 /*
 sleep(30);
 */

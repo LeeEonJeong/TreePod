@@ -21,7 +21,7 @@ function display(my_id,type) {
         if(xhr.readyState === 4 && xhr.status === 200) {
 
             var temp_text = xhr.responseText;
-         //   alert(temp_text);
+     //       alert(temp_text);
             var option_array = temp_text.split("<option>");
             var input_id = document.getElementById(type);
 
