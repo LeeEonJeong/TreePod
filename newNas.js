@@ -41,7 +41,7 @@ function isEnglihOrNum(str){
   
     for (var i=0; i<str.length; i++)  { 
        var chk = str.substring(i,i+1); 
-        if(!chk.match(/[0-9]|[a-z]|[A-Z]/)) { 
+        if(!chk.match(/[0-9]|[a-z]|[A-Z]|[-]|[_]/)) { 
             err = err + 1; 
         } 
     }    

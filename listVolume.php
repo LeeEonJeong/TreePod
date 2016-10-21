@@ -65,7 +65,7 @@ include_once('var_dump_enter.php');
 
 
 
-<tr><td></td></tr>
+
 <tr class="background_gray">
   <td style="width:20%"><b>이름</b></td>
   <td style="width:15%"><b>지역</b></td>

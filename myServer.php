@@ -109,26 +109,30 @@ function viewPassword(t){
   }
 
 
-
+  var renewPage = function(){
+    span_start = 2;
+    span_end = 1;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','renewMyServer.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      //  alert(xhr.responseText);
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        document.querySelector('#myVM').innerHTML = xhr.responseText;
+          //  alert(xhr.responseText);
+      }
+    }
+       // xhr.send();
+        // alert("ajax use");
+    stateClose();
+  }
+  
   function renewMyServer(){
 //    alert('renewMyServer');
 
-    if(isVMdeleted(span_start,span_end) == true){
-        span_start = 2;
-        span_end = 1;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET','renewMyServer.php');
-        xhr.send();
-        xhr.onreadystatechange = function(){
-        //  alert(xhr.responseText);
-          if(xhr.readyState === 4 && xhr.status === 200) {
-            document.querySelector('#myVM').innerHTML = xhr.responseText;
-          //  alert(xhr.responseText);
-          }
-        }
-       // xhr.send();
-        // alert("ajax use");
-        stateClose();
+    if(isVMdeleted(span_start,span_end) == true){      
+        Confirm.render('VM','삭제가 완료 되었습니다',renewPage,'','no');
+        
      }
 
   }

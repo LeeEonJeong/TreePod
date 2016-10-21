@@ -42,6 +42,7 @@ function resizeSubmit(){
 }
 
 function stateClose(){
+//  alert('>>>');
   document.getElementById('NASState').style.display="none";
 }
 function listClose(){
@@ -49,6 +50,7 @@ function listClose(){
 }
 function NASAttachSubmit(){
   var form = document.getElementById('NAS_connect_form');
+//  form.action='test.php';
   form.action='NASAttach.php';
   form.method='post';
   Alert.render('NAS','서버 연결 진행중...','');
@@ -107,19 +109,45 @@ function showNASList(t){
 
 }
 
-function showNasConnect(num){
-    var postVal = document.forms[num].id.value;
+function showNasConnectState(num/*, zoneid*/){
+   stateClose();
+    var postVal = document.forms[num];
     var xhr = new XMLHttpRequest();
     xhr.open('POST','NASConnectState.php');
     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    var data = 'id='+postVal;
+    var data = 'networkid='+postVal.networkid.value;
+    data += '&zoneid='+postVal.zoneid.value;
+    data += '&displaytext='+postVal.displaytext.value;
+  //  data = data + '&zoneid=' + zoneid;
     xhr.send(data);
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200) {
           var temp_text = xhr.responseText;
      //     alert(temp_text);
-          document.getElementById('NASState').innerHTML = xhr.responseText;
+          document.getElementById('NASList').innerHTML = xhr.responseText;
         }
       }
-    document.getElementById('NASState').style.display = 'table';
+    document.getElementById('NASList').style.display = 'table-row-group';
+}
+
+
+function showNasConnect(num/*, zoneid*/){
+   stateClose();
+    var postVal = document.forms[num];
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','NASConnect.php');
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    var data = 'networkid='+postVal.networkid.value;
+    data += '&zoneid='+postVal.zoneid.value;
+    data += '&displaytext='+postVal.displaytext.value;
+  //  data = data + '&zoneid=' + zoneid;
+    xhr.send(data);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200) {
+          var temp_text = xhr.responseText;
+     //     alert(temp_text);
+          document.getElementById('NASList').innerHTML = xhr.responseText;
+        }
+      }
+    document.getElementById('NASList').style.display = 'table-row-group';
 }

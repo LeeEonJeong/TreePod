@@ -25,10 +25,10 @@ include_once('head2.php');
 <table  class="noline hoverOn">
 <tbody id="myVM"><!-- onmouseover='renewMyServer()'>-->
 <tr class="background_gray">
-  <td style='width: 25%'>CIP</td>
-  <td style='width: 20%'>연결 NAS</td>
-  <td style='width: 30%'>연결 VM</td>
-  <td style='width: 25%'>zone</td>
+  <td style='width: 25%'><b>CIP</b></td>
+  <td style='width: 20%'><b>연결 NAS</b></td>
+  <td style='width: 30%'><b>연결 VM</b></td>
+  <td style='width: 25%'><b>zone</b></td>
 </tr>
 <?php
 
@@ -59,7 +59,14 @@ for($i=0; $i<$result_num; $i++) {
   
   </td>
   <td><button class='button2' onclick="showNASList('<?=$NASCIP['id']?>')">조회하기</button></td>
-  <td style='width: 30%'><button class='button2' onclick=''>조회하기</button> <button class='button2' onclick=''>등록하기</button></td>
+  <td style='width: 30%'>
+    <form>
+      <input type='hidden' name='networkid' value='<?=$NASCIP['id']?>'/>
+      <input type='hidden' name='zoneid' value='<?=$NASCIP['zoneid']?>'/>
+      <input type='hidden' name='displaytext' value='<?=$NASCIP['displaytext']?>'/>
+    </form>
+    <button class='button2' onclick="showNasConnectState('<?= $i?>')">조회하기</button> 
+    <button class='button2' onclick="showNasConnect('<?=$i?>')">등록하기</button></td>
   <td><?=$NASCIP['zonename'];?></td>
   </tr>
   <?php

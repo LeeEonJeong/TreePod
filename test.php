@@ -21,7 +21,7 @@ function objectsIntoArray($arrObjData, $arrSkipIndices = array())
     }
     return $arrData;
 }
- 
+ /*
     $xmlUrl = "https://api.ucloudbiz.olleh.com/nas/v1/client/api?apikey=_zbeka8OKky0V0mIRlzY9dn3Ph0ZmcmM6RZQI8vsUwE9Qgsb-puzVYyWvJ3aGnLfVxb5JTK2jjKXIbPzLmN0mg&command=listCifsAccounts&signature=FozEgCdeeOKVYh6lybkmIgbF%2BHw%3D";
 	//	$xmlUrl = "https://api.ucloudbiz.olleh.com/nas/v1/client/api?apikey=_zbeka8OKky0V0mIRlzY9dn3Ph0ZmcmM6RZQI8vsUwE9Qgsb-puzVYyWvJ3aGnLfVxb5JTK2jjKXIbPzLmN0mg&command=listNass&signature=9GCqxcw5P6E%2F52lFx0hw2Y%2FohAc%3D";
         $str = file_get_contents($xmlUrl);
@@ -35,5 +35,5 @@ function objectsIntoArray($arrObjData, $arrSkipIndices = array())
         $obj = simplexml_load_string($str);
 
         $arrXml = objectsIntoArray($obj);
-        var_dump_enter($arrXml);
+        var_dump_enter($arrXml);*/
 ?>
