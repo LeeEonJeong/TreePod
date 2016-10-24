@@ -80,6 +80,66 @@ function callCommand($URL, $cmdArr, $SECRET)
         return $arrXml;
 }
 
+function callCommandJSON($URL, $cmdArr, $SECRET)
+{
+ //       echo "Command start<br/>";
+        $cmdArr['response']='json';
+        $fArray = array_keys($cmdArr);
+        $vArray = array_values($cmdArr);
+        $f = array(); $v = array(); $cmd = array(); $cmd1 = array();
+        for ( $i = 0; $i < count($cmdArr); $i++ )
+        {
+        $vArray[$i]= strtok($vArray[$i], "&");
+ 
+        $f[$i] = strtolower(urlencode($fArray[$i]));
+        $v[$i] = strtolower(urlencode($vArray[$i]));
+        array_push($cmd, $f[$i]."=".$v[$i]);
+        }
+       sort($cmd);
+ 
+        for ( $i = 0; $i < count($cmdArr); $i++ )
+                array_push($cmd1, $fArray[$i]."=".$vArray[$i]);
+        sort($cmd1);
+ 
+        $cmdStr = "";
+        for ( $i = 0; $i < count($cmd); $i++)
+        {
+        if ( $i == count($cmd) - 1 )
+                $cmdStr = $cmdStr . $cmd[$i];
+        else
+                $cmdStr = $cmdStr . $cmd[$i] . "&";
+        }
+        $signature = urlencode(base64_encode(hash_hmac("sha1", $cmdStr, $SECRET, true)));
+        $url = $URL;
+        for ( $i = 0; $i < count($cmd1); $i++)
+                $url = $url . $cmd1[$i] . "&";
+        $xmlUrl = $url . "signature=" . $signature;
+ 
+    //    echo ($xmlUrl."<br/>"); // 디버깅 할때만 보이게 할것.
+        $orig_error_reporting = error_reporting();
+        error_reporting(0);
+
+    //    $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
+    //    $context = stream_context_create($opts);
+    //    $header = file_get_contents($xmlUrl, FALSE, $context);
+    //    echo $header;
+    //    var_dump_enter(file_get_contents($xmlUrl));
+        $str = file_get_contents($xmlUrl);
+    //    var_dump_enter($str);
+        if($str == FALSE) {
+        //    var_dump_enter($str);
+        //    echo "<br/>ERROR in API<br/>"; // 디버깅 할때만 보이게 할것.
+            return array("jobid"=>"ERROR");
+        }
+    //  echo "<pre>".htmlentities($str)."</pre>";
+    //    $obj = simplexml_load_string($str);
+        $obj = json_decode($str);
+        $arrJson = objectsIntoArray($obj);
+       
+        error_reporting($orig_error_reporting);
+        return $arrJson;
+}
+
 
 
 ?>

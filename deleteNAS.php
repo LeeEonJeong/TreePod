@@ -32,8 +32,19 @@ $URL_NAS ="https://api.ucloudbiz.olleh.com/nas/v1/client/api?";
  set_time_limit(600);
 
  $result = callCommand($URL_NAS, $cmdArr, SECERET_KEY);
- var_dump_enter($result);
+ //var_dump_enter($result);
 //exit;
+
+if($result['status']=='error') {
+  echo "<script>Confirm.render('NAS','".$result['errortext']."',err_info,'','no')</script>";
+  exit;
+  //echo "<script>location.replace('listNas.php');</script>";
+}
+
+echo "<script>Confirm.render('NAS','삭제 신청이 완료 되었습니다.',loca,'','no')</script>";
+
+
+ /*
  if(isset($result['jobid'])) {
  	if($result['jobid']=="ERROR"){
  		echo "<script>Confirm.render('NAS','오류가 발생했습니다!',err_info,'','no');</script>";
@@ -46,6 +57,7 @@ echo "<script>Confirm.render('NAS','삭제 신청이 완료 되었습니다',loc
 
 //exit;
 //exit;
+*/
 ?>
 
 

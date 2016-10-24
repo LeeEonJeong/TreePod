@@ -71,3 +71,39 @@ function CustomConfirm(){
     }
 }
 var Confirm = new CustomConfirm();
+
+
+function CustomPrompt(){
+    var parameters;
+    this.render = function(head,dialog,type,func,para){
+        parameters = para;
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogoverlay = document.getElementById('dialogoverlay');
+        var dialogbox = document.getElementById('dialogbox');
+        dialogoverlay.style.display = "block";
+        dialogoverlay.style.height = winH+"px";
+        dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+        dialogbox.style.top = "100px";
+        dialogbox.style.display = "block";
+        document.getElementById('dialogboxhead').innerHTML = head;
+        document.getElementById('dialogboxbody').innerHTML = dialog;
+        document.getElementById('dialogboxbody').innerHTML += '<input type="'+type+'" class="transparent" id="prompt_value1">';
+        document.getElementById('dialogboxfoot').innerHTML = '<button class="button2" onclick="Prompt.ok(\''+func+'\')">OK</button> <button class="button2" onclick="Prompt.cancel()">Cancel</button>';
+    }
+    this.cancel = function(){
+        document.getElementById('dialogbox').style.display = "none";
+        document.getElementById('dialogoverlay').style.display = "none";
+        parameters='';
+    }
+    this.ok = function(func){
+        var prompt_value1 = document.getElementById('prompt_value1').value;
+
+        if( window[func](parameters,prompt_value1) == true) {
+            document.getElementById('dialogbox').style.display = "none";
+            document.getElementById('dialogoverlay').style.display = "none";
+        }
+        parameters='';
+    }
+}
+var Prompt = new CustomPrompt();

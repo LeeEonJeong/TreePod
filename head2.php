@@ -36,7 +36,7 @@ include_once('login_certify.php');
 <li><a href="javascript:vold(0)">NAS</a>
   <ul>
     <li><a href="newNas.php">New NAS</a></li>
-    <li><a href="listNas.php">My NAS</a></li>
+    <li><a href="listNAS.php">My NAS</a></li>
     <li><a href="cifsAccount.php">CIFS Account</a></li>
   </ul>
 </li>
