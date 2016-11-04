@@ -1,14 +1,16 @@
+<?php @session_start(); ?>
 <?php
-@session_start();
-include_once('api_constants.php');
-include_once('customAlert.html');
+$server_root_path = $_SERVER['DOCUMENT_ROOT'];// ini_set('include_path',$server_root_path);
+include_once($server_root_path.'/includeFiles.php');
+include_once($server_root_path.'/'.CLOUD_PATH.'include/api_constants.php');
+include_once($server_root_path.'/'.CLOUD_PATH.'customAlert/customAlert.html');
 ?>
 <script>
 	var loca = function(){
 		location.replace('login_notice.php');
 	}	
 	
-			Alert.render('Log In','잠시만 기다려 주세요...','');
+	Alert.render('Log In','잠시만 기다려 주세요...','');
 </script>
 <?php
 //var_dump($_POST);

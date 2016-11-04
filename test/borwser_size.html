@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> Browser Size </title>
+  <script type="text/javascript">
+  <!--
+	function getDisplayInfo() {
+		var size = {
+		  width: window.innerWidth || document.body.clientWidth,
+		  height: window.innerHeight || document.body.clientHeight
+		}
+		var w = document.getElementById("dispWidth");
+		var h = document.getElementById("dispHeight");
+		w.innerHTML = size.width;
+		h.innerHTML = size.height;
+	}
+
+	window.onload = getDisplayInfo;
+  //-->
+  </script>
+ </head>
+
+ <body>
+  <h3>Current Display info</h3>
+  <div>w: <span id="dispWidth">widht</span>px / h: <span id="dispHeight">height</span>px</div>
+ </body>
+</html>

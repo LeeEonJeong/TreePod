@@ -1,5 +1,9 @@
-<?php 
-include('customAlert.html');
+<?php
+$server_root_path = $_SERVER['DOCUMENT_ROOT']; //ini_set('include_path',$server_root_path);
+include_once($server_root_path.'/includeFiles.php');
+?>
+<?php
+ include_once($server_root_path.'/'.CLOUD_PATH.'customAlert/customAlert.html');
 	session_start();
 	session_destroy();
 	foreach($_COOKIE as $key=>$val){ 

@@ -1,10 +1,14 @@
-
+<?php
+$server_root_path = $_SERVER['DOCUMENT_ROOT'];// ini_set('include_path',$server_root_path);
+include_once($server_root_path.'/includeFiles.php');
+include_once($server_root_path.'/'.CLOUD_PATH.'customAlert/customAlert.html');
+?>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="design.css">
-<link rel="stylesheet" type="text/css" href="menu_design.css">
-<link rel="stylesheet" type="text/css" href="alert_bar_design.css">
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>include/design.css">
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>include/menu_design.css">
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>alertBar/alert_bar_design.css">
 	<meta charset="utf-8"/>
 	<title></title>
 	<script src="//code.jquery.com/jquery.min.js"></script>
@@ -39,7 +43,7 @@
 
 </head>
 <body>
-<?php include_once('customAlert.html');?>
+
 <div  class="login_container">
 <table class="login_box noline noHover" >
 <tbody>

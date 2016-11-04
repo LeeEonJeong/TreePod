@@ -1,20 +1,27 @@
+<?php
+$server_root_path = $_SERVER['DOCUMENT_ROOT']; //ini_set('include_path',$server_root_path);
+include_once($server_root_path.'/includeFiles.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
 
-<style>
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>include/design.css">
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>include/menu_design.css">
+<link rel="stylesheet" type="text/css" href="/<?=CLOUD_PATH?>alertBar/alert_bar_design.css">
 
-</style>
 
 </head>
 <body>
+
 <?php
-include_once('head2.php');
-include_once('api_constants.php');
-include_once('./callAPI.php');
-include_once('var_dump_enter.php');
-//include('alert.html');
+include_once($server_root_path.'/'.CLOUD_PATH.'pageInclude/menuPageInclude.php');
+/*
+include_once($server_root_path.'/'.CLOUD_PATH.'include/head2.php');
+include_once($server_root_path.'/'.CLOUD_PATH.'include/callAPI.php');
+*/
+//echo ID;
 
 $URL = "https://api.ucloudbiz.olleh.com/server/v1/client/api?";
 $URL_NAS = "https://api.ucloudbiz.olleh.com/nas/v1/client/api?";
